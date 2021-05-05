@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="pam-upgrade-legacy">
+    <title><ph conkeyref="ProductNames/pam_long">online </ph> legacy upgrades</title>
+    <shortdesc> Use this method to upgrade <ph conkeyref="ProductNames/pam_long">online </ph> from a
+        version installed before April 2021. </shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-19"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <context>
+            <p>The legacy version reflects an older configuration that used <ph
+                    conkeyref="ProductNames/ceph"/> 1.0 which hosted data directly on the file
+                system. <ph conkeyref="ProductNames/puppet"/> no longer recommend this for new
+                installs, but maintain it to support existing installs and ensure other components
+                can be kept up-to-date.</p>
+            <p>To upgrade a legacy version of <ph conkeyref="ProductNames/pam_long">online </ph> on
+                nodes with internet access:</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>On your node (or control plane node if you have a HA deployment), rerun the
+                    installation script, passing in any arguments you included when installing for
+                    the first time:</cmd>
+                <info>
+                    <codeblock translate="no">curl -sSL https://k8s.kurl.sh/puppet-application-manager-legacy | sudo bash</codeblock>
+                </info>
+            </step>
+            <step>
+                <cmd>If a new version of <ph conkeyref="ProductNames/kubernetes"/> is available, the
+                    systems provide upgrade scripts to run on each node in your cluster. </cmd>
+                <info>Node draining is performed as part of a <ph
+                        conkeyref="ProductNames/kubernetes"/> upgrade. The node draining process can
+                    take several minutes to complete. <note>During the <ph
+                            conkeyref="ProductNames/kubernetes"/> upgrade process, nodes are not
+                        able to properly route network connections. If you have a HA deployment,
+                        make sure you have load balancers or a multi-node fail-over process in
+                        place, or schedule downtime before upgrading. </note></info>
+            </step>
+        </steps>
+    </taskbody>
+</task>

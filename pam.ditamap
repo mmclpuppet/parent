@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map id="pam">    
+    <title>SHARED - Puppet Application Manager</title>
+    <topicmeta>
+        <prodinfo>
+            <prodname>Puppet Application Manager</prodname>
+            <vrmlist>
+                <vrm version="1.0"/>
+            </vrmlist>
+        </prodinfo>
+    </topicmeta>
+    <topicref href="pam-intro.dita" keys="pam-intro"/>
+    <topicref href="pam-release-notes.dita" keys="pam-relnotes"/>
+    <topicref href="pam-ui.dita" keys="pam-ui"/>
+    <topicref href="pam-node-arch.dita" keys="pam-node-arch"/>
+    <topicref href="pam-sysreqs.dita" keys="pam-sysreqs" toc="yes"/>
+    <topicref href="pam-install.dita" keys="pam-install">
+        <topicref href="pam-standalone-online-install.dita" keys="pam-standalone-online-install"
+            toc="yes"/>
+        <topicref href="pam-standalone-offline-install.dita" keys="pam-standalone-offline-install"
+            toc="yes"/>
+        <topicref href="pam-ha-online-install.dita" keys="pam-ha-online-install" toc="yes"/>
+        <topicref href="pam-ha-offline-install.dita" keys="pam-ha-offline-install" toc="yes"/>
+    </topicref>
+    <topicref chunk="to-content" href="upgrade-pam.dita" keys="upgrade-pam">
+        <topicref href="pam-upgrade.dita" keys="pam-upgrade" toc="no"/>
+        <topicref href="pam-offline-upgrade.dita" keys="pam-offline-upgrade" toc="no"/>
+        <topicref href="pam-upgrade-legacy.dita" keys="pam-upgrade-legacy" toc="no"/>
+        <topicref href="pam-offline-upgrade-legacy.dita" keys="pam-upgtade-offline-legacy" toc="no"/>
+    </topicref>
+    <topicref chunk="to-content" href="pam-snapshots.dita" keys="pam-snapshots">
+        <topicref href="pam-configure-snapshots.dita" keys="pam-cfg-snapshots" toc="no"/>
+        <topicref href="pam-rollback-snapshot.dita" keys="pam-rollback-shapshots" toc="no"/>
+        <topicref href="pam-dr-snapshot.dita" keys="pam-dr-snapshots" toc="no"/>
+    </topicref>
+    <topicref chunk="to-content" href="pam-troubleshooting.dita" keys="pam-troubleshooting">
+        <topicref href="resolving_ip_range_conflicts.dita" keys="pam-resolve-ip-conflicts" toc="no"/>   
+        <topicref href="pam-console-pwd-reset.dita" keys="pam-console-pwd-reset" toc="no"/>
+        <topicref href="pam-tls-certificate.dita" keys="pam-tls-cert" toc="no"/>
+        <topicref href="pam-fail-recovery-time.dita" keys="pam-fail-recovery-time" toc="no"/>
+        <topicref href="pam-components.dita" keys="pam-components" toc="no"/>    
+    </topicref>
+    <mapref format="ditamap" href="pam-external-links.ditamap" keys="pam-externallinks"
+        processing-role="resource-only"/>
+    <keydef href="conref-images.dita" keys="pam-conref-images"/>
+    <keydef href="conref_concept.dita" keys="pam-conref-concept"/>
+    <keydef href="conref-task.dita" keys="pam-conref-task"/>
+    <keydef href="shared-common/keywords.dita" keys="ProductNames"/>
+    <reltable>
+        <relheader>
+            <relcolspec linking="sourceonly" type="topic"/>
+            <relcolspec linking="targetonly" type="topic"/>
+        </relheader>
+        <relrow><relcell></relcell><relcell></relcell></relrow>
+        <relrow><relcell></relcell><relcell></relcell></relrow>
+        <relrow><relcell></relcell><relcell></relcell></relrow>
+    </reltable>
+</map>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task ditaarch:DITAArchVersion="1.2" id="pam-conref-task"
+    xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <title>Conref task warehouse</title>
+    <shortdesc/>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-21"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <prereq>
+            <ol>
+                <li id="install-prereq1">Review the <xref keyref="pam-sysreqs">system
+                        requirements</xref>.<p>For HA implementations, each server must meet the
+                        following minimum requirements. Secondaries must only be added after setting
+                        up 3 primaries: </p><p id="ha-sysreqs-table">
+                        <table>
+                            <tgroup cols="5">
+                                <colspec colname="col1" colnum="1"/>
+                                <colspec colname="col2" colnum="2"/>
+                                <colspec colname="col3" colnum="3"/>
+                                <colspec colname="col4" colnum="4"/>
+                                <colspec colname="col5" colnum="5"/>
+                                <thead>
+                                    <row>
+                                        <entry><b>Node type</b></entry>
+                                        <entry><b>Memory</b></entry>
+                                        <entry><b>Storage</b></entry>
+                                        <entry><b>CPUs</b></entry>
+                                        <entry><b>Open ports</b></entry>
+                                    </row>
+                                </thead>
+                                <tbody>
+                                    <row>
+                                        <entry>Primary</entry>
+                                        <entry>7 GB + application requirements</entry>
+                                        <entry>
+                                            <p>At least 50 GB on an unformatted storage device (such
+                                                as a partition or raw device) + additional
+                                                application-specific storage</p>
+                                            <p>At least 100 GB for <codeph translate="no"
+                                                  >/var/lib.</codeph> This is primarily divided
+                                                among:</p>
+                                            <ul>
+                                                <li> 2 GB for <codeph translate="no"
+                                                  >/var/lib/etcd</codeph>
+                                                </li>
+                                                <li> 4 GB for <codeph translate="no"
+                                                  >/var/lib/rook</codeph> (plus buffer) </li>
+                                                <li> 32 GB for <codeph translate="no"
+                                                  >/var/lib/kubelet</codeph>
+                                                </li>
+                                                <li> 40 GB for <codeph translate="no"
+                                                  >/var/lib/containerd</codeph>
+                                                </li>
+                                            </ul>
+                                            <p>Note: <ph conkeyref="ProductNames/ceph"/> storage
+                                                back-end prefers the file system inhabited by
+                                                  <codeph translate="no">/var/lib/rook</codeph> to
+                                                remain below 70% utilization.</p>
+                                            <p>SSDs (or similarly low-latency storage) are
+                                                recommended for <codeph translate="no"
+                                                  >/var/lib/etcd</codeph> and <codeph translate="no"
+                                                  >/var/lib/rook</codeph>.</p>
+                                        </entry>
+                                        <entry>4</entry>
+                                        <entry morerows="1">
+                                            <p>TCP: 443, 2379,2380, 6443, 6783, 8000, 8800, and
+                                                10250</p>
+                                            <p>UDP: 6783, 6784</p>
+                                        </entry>
+                                    </row>
+                                    <row>
+                                        <entry>Secondary</entry>
+                                        <entry>1.5 GB + application requirements</entry>
+                                        <entry>
+                                            <p>At least 80 GB for <codeph translate="no"
+                                                  >/var/lib</codeph>. This is primarily divided
+                                                among:</p>
+                                            <ul>
+                                                <li>
+                                                  <p>32 GB for <codeph translate="no"
+                                                  >/var/lib/kubelet</codeph></p>
+                                                </li>
+                                                <li>
+                                                  <p>40 GB for <codeph translate="no"
+                                                  >/var/lib/containerd</codeph></p>
+                                                </li>
+                                            </ul>
+                                        </entry>
+                                        <entry>1</entry>
+                                    </row>
+                                </tbody>
+                            </tgroup>
+                        </table>
+                    </p><note>Swap, Firewalld, and SELinux are not supported for use with this
+                        version of <ph conkeyref="ProductNames/pam_long"/>. The installation script
+                        attempts to disable these services if they are present. </note></li>
+                <li id="install-prereq2">
+                    <p id="pam-ip-range">Ensure that IP address ranges <codeph translate="no"
+                            >10.96.0.0/22</codeph> and <codeph translate="no">10.32.0.0/22</codeph>
+                        are locally accessible. See <xref keyref="pam-resolve-ip-conflicts">Resolve
+                            IP address range conflicts</xref> for instructions.</p>
+                </li>
+            </ol>
+        </prereq>
+        <context>
+            <p>HA install</p>
+            <draft-comment author="michael.mcloughlin" translate="no">Used by
+                pam-ha-online-install.dita, pam-ha-offline-install.dita</draft-comment>
+        </context>
+        <steps>
+            <step id="install-lb">
+                <cmd>Install and configure a load balancer (or two if you want to segment internal
+                    and external traffic - for more information, see <xref keyref="pam-node-arch"
+                    />). Round-robin load balancing is sufficient.  For an HA cluster, the following
+                    is required:</cmd>
+                <info>
+                    <ul id="pam-lb-reqs">
+                        <li dir="ltr">
+                            <p dir="ltr">A network (L4, TCP) load balancer for port 6443 across
+                                primary nodes. This is required for <ph
+                                    conkeyref="ProductNames/kubernetes"/> components to continue
+                                operating in the event that a node fails. The port is only accessed
+                                by the <ph conkeyref="ProductNames/kubernetes"/> nodes and any
+                                admins using <codeph translate="no">kubectl</codeph>.</p>
+                        </li>
+                        <li dir="ltr">
+                            <p dir="ltr">A network (L4, TCP) or application (L7, HTTP/S) load
+                                balancer for ports 80, and 443 across all primaries and secondaries.
+                                This maintains access to applications in event of a node failure.
+                                Include 8800 if you want external access to the <ph
+                                    conkeyref="ProductNames/pam_long"/> UI.</p>
+                            <note> Include port 8000 for webhook callbacks if you are installing <ph
+                                    conkeyref="ProductNames/cd">Continuous Delivery for
+                                PE</ph>.</note>
+                        </li>
+                    </ul>
+                </info>
+            </step>
+            <step>
+                <cmd>Run the installation command:</cmd>
+                <info>
+                    <codeblock translate="no">cat install.sh | sudo bash -s airgap </codeblock>
+                    <note id="storage-note">An unformatted storage device is required. This can be
+                        either a partition or raw storage device. <p>By default this installation
+                            automatically uses devices (under <codeph translate="no">/dev</codeph>)
+                            matching the pattern <codeph translate="no">vd[b-z]</codeph>. Attach a
+                            device to each host. Only devices that match the pattern, and are
+                            unformatted, are used.</p><p>If necessary, you can override this pattern
+                            by providing a patch during installation; append <codeph>-s
+                                installer-spec-file=patch.yaml</codeph> to the install command.
+                        </p><codeblock translate="no">apiVersion: cluster.kurl.sh/v1beta1
+kind: Installer
+metadata:
+  name: patch
+spec:
+  rook:
+    blockDeviceFilter: vda3 # as an example
+</codeblock></note>
+                </info>
+                <substeps>
+                    <substep id="install-substep1">
+                        <cmd>When prompted for a load balancer address, enter the address of the DNS
+                            entry for your load balancer.</cmd>
+                    </substep>
+                    <substep id="install-substep2">
+                        <cmd>The installation script prints the address and password (only shown
+                            once, so make careful note of it) for <ph
+                                conkeyref="ProductNames/pam_long"/>:</cmd>
+                        <info>
+                            <codeblock translate="no">---
+Kotsadm: http://&lt;PUPPET APPLICATION MANAGER ADDRESS>:8800
+Login with password (will not be shown again): &lt;PASSWORD>
+---</codeblock>
+                            <note>If you lose this password or wish to change it, see <xref
+                                    keyref="pam-console-pwd-reset">Resetting the platform admin
+                                    console password</xref> for instructions. </note>
+                        </info>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="add-other-nodes">
+                <cmd>Follow instructions outlined after the following line in the install
+                    script:</cmd>
+                <info>
+                    <codeblock translate="no">To add MASTER nodes to this installation, run the following script on your other nodes: 
+curl -sSL 
+https://kurl.sh/puppet-application-manager-unstable/join.sh 
+| sudo bash -s kubernetes-master-address=...</codeblock>
+                    <draft-comment author="michael.mcloughlin" translate="no">more info
+                        needed</draft-comment>
+                </info>
+            </step>
+            <step id="step-addnodes">
+                <cmd>Add the new nodes to your load balancer.</cmd>
+            </step>
+            <step id="step-complete-install">
+                <cmd>Navigate to <ph conkeyref="ProductNames/pam_long"/> UI using the address
+                    provided by the installation script  (http://&lt;PUPPET APPLICATION MANAGER
+                    ADDRESS>:8800)  and follow the prompts.</cmd>
+                <info>The <ph conkeyref="ProductNames/pam_long"/> UI is where you manage <ph
+                        conkeyref="ProductNames/pam_long"/> applications. You’ll be guided through
+                    the process of setting up SSL certificates, uploading a license, and checking to
+                    make sure your infrastructure meets application system requirements.</info>
+            </step>
+        </steps>
+        <postreq id="install-postreq">
+            <p>Follow the instructions for installing your <ph conkeyref="ProductNames/puppet"/>
+                applications on <ph conkeyref="ProductNames/pam_long"/>.</p>
+            <draft-comment author="michael.mcloughlin" translate="no">Used in
+                pam-standalone-online-install.dita pam-ha-online-install.dita</draft-comment>
+            <p id="install-cd4pe-online">For more information on installing <ph
+                    conkeyref="ProductNames/cd"/> online, see <xref keyref="ext-cd4peinstallonline"
+                />.</p>
+            <p id="install-comply-online">For more information on installing <ph
+                    conkeyref="ProductNames/comply"/> online, see <xref
+                    keyref="ext-complyinstallonline"/>.</p>
+            <draft-comment author="michael.mcloughlin" translate="no">Used in
+                pam-standalone-offline-install.dita pam-ha-offline-install.dita</draft-comment>
+            <p id="install-cd4pe-offline">For more information on installing <ph
+                    conkeyref="ProductNames/cd"/> offline, see <xref
+                    keyref="ext-cd4peinstalloffline"/>.</p>
+            <p id="install-comply-offline">For more information on installing <ph
+                    conkeyref="ProductNames/comply"/> offline, see <xref
+                    keyref="ext-complyinstalloffline"/>.</p>
+        </postreq>
+    </taskbody>
+    <task id="sa-install">
+        <title>Standalone install</title>
+        <taskbody>
+            <prereq>
+                <ol>
+                    <li id="prereq-SAinstall1">Review the <xref keyref="pam-sysreqs">system
+                            requirements</xref>.<p>The server must meet the following minimum
+                            requirements: <draft-comment author="michael.mcloughlin" translate="no"
+                                >These are CD4PE reqs - check validity for PAM</draft-comment></p><p
+                            id="sa-sysreqs-table">
+                            <table>
+                                <tgroup cols="4">
+                                    <colspec colname="col1" colnum="1"/>
+                                    <colspec colname="col2" colnum="2"/>
+                                    <colspec colname="col3" colnum="3"/>
+                                    <colspec colname="col4" colnum="4"/>
+                                    <thead>
+                                        <row>
+                                            <entry><b>Memory</b></entry>
+                                            <entry><b>Storage</b></entry>
+                                            <entry><b>CPUs</b></entry>
+                                            <entry><b>Open ports</b></entry>
+                                        </row>
+                                    </thead>
+                                    <tbody>
+                                        <row>
+                                            <entry>2GB + application requirements</entry>
+                                            <entry>
+                                                <p>At least 100 GB for<codeph translate="no">
+                                                  /var/lib</codeph> and <codeph translate="no"
+                                                  >/var/openebs</codeph>. This is primarily divided
+                                                  among:</p>
+                                                <ul>
+                                                  <li>2 GB for <codeph translate="no"
+                                                  >/var/lib/etcd</codeph></li>
+                                                  <li>32 GB for <codeph translate="no"
+                                                  >/var/lib/kubelet</codeph></li>
+                                                  <li>40 GB for <codeph translate="no"
+                                                  >/var/lib/containerd</codeph></li>
+                                                  <li>20 GB for <codeph translate="no"
+                                                  >/var/openebs</codeph> + additional
+                                                  application-specific storage</li>
+                                                </ul>
+                                                <p><b>Note:</b>
+                                                  <codeph translate="no">/var/openebs</codeph> and
+                                                  <codeph translate="no">/var/lib/kubelet</codeph>
+                                                  share hard links, so they must be located on the
+                                                  same file system.</p>
+                                            </entry>
+                                            <entry>2 + application requirements</entry>
+                                            <entry>
+                                                <p>TCP: 443, 2379,2380, 6443, 6783, 8800, and
+                                                  10250</p>
+                                                <p>UDP: 6783, 6784</p>
+                                            </entry>
+                                        </row>
+                                    </tbody>
+                                </tgroup>
+                            </table>
+                        </p><note>Swap, Firewalld, and SELinux are not supported for use with this
+                            version of <ph conkeyref="ProductNames/pam_long"/>. The installation
+                            script attempts to disable these services if they are present.
+                        </note></li>
+                    <li id="prereq-SAinstall2">Ensure that IP address ranges <codeph translate="no"
+                            >10.96.0.0/22</codeph> and <codeph translate="no">10.32.0.0/22</codeph>
+                        are locally accessible. See <xref keyref="pam-resolve-ip-conflicts">Resolve
+                            IP address range conflicts</xref> for instructions. </li>
+                </ol>
+            </prereq>
+            <context>
+                <p/>
+                <draft-comment author="michael.mcloughlin" translate="no">Used by
+                    pam-standalone-online-install.dita,
+                    pam-standalone-offline-install.dita</draft-comment>
+            </context>
+            <steps>
+                <step>
+                    <cmd/>
+                </step>
+            </steps>
+        </taskbody>
+    </task>
+</task>

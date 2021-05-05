@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="upgrade-pam">
+    <title>Upgrading <ph conkeyref="ProductNames/pam_long"/></title>
+    <shortdesc>Upgrade <ph conkeyref="ProductNames/pam_long"/> to take advantage of new features and
+        bug fixes, and to upgrade your cluster to the latest version of <ph
+            conkeyref="ProductNames/kubernetes"/> when one is available. </shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-19"/>
+        </critdates>
+    </prolog>
+    <conbody>
+        <p>There are 4 possible upgrade types for <ph conkeyref="ProductNames/pam_long"/>
+            installations:</p>
+        <ul>
+            <li><b>Online</b> - For standalone or HA installations with a connection to the
+                internet.</li>
+            <li><b>Offline</b> - For  air-gapped standalone or HA installations without a connection
+                to the internet.</li>
+            <li><b>Online legacy</b> - For HA installations made prior to April 2021with a
+                connection to the internet.</li>
+            <li><b>Offline legacy</b> - For  air-gapped HA installations prior to April 2021 without
+                a connection to the internet.</li>
+        </ul>
+    </conbody>
+</concept>

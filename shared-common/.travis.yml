@@ -1,0 +1,14 @@
+if: type = push AND branch IN (master)
+
+language: ruby
+
+script: "rake merge"
+sudo: false
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+
+rvm:
+  - 2.5.1

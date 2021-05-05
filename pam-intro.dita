@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="pam-intro">
+    <title>Welcome to <ph conkeyref="ProductNames/pam_long">Welcome tWelcom to </ph></title>
+    <shortdesc><ph conkeyref="ProductNames/pam_long"/> is an administrative console where you can
+        install, access and manage your <ph conkeyref="ProductNames/puppet"/> applications. It is
+        also where you can go to access upgrades to new <ph conkeyref="ProductNames/puppet"/>
+        applications releases. </shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021/04/12"/>
+        </critdates>
+    </prolog>
+    <conbody>
+        <p>Useful links:</p>
+        <table>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry><ph conkeyref="ProductNames/pam_long"/> docs links</entry>
+                        <entry>Other useful places</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            <dl>
+                                <dlentry>
+                                    <dt>Before you install</dt>
+                                    <dd>
+                                        <xref keyref="pam-relnotes">Release notes</xref></dd>
+                                    <dd>
+                                        <xref keyref="pam-sysreqs">System requirements</xref></dd>
+                                </dlentry>
+                            </dl>
+                            <dl>
+                                <dlentry>
+                                    <dt>Install <ph conkeyref="ProductNames/pam_long"/>
+                                    </dt>
+                                    <dd>
+                                        <xref keyref="pam-standalone-online-install"/></dd>
+                                    <dd>
+                                        <xref keyref="pam-standalone-offline-install"/>
+                                    </dd>
+                                    <dd>
+                                        <xref keyref="pam-ha-online-install"/>
+                                    </dd>
+                                    <dd>
+                                        <xref keyref="pam-ha-online-install"/>
+                                    </dd>
+                                </dlentry>
+                            </dl>
+                            <dl>
+                                <dlentry>
+                                    <dt>Upgrading, disaster recovery, and troubleshooting</dt>
+                                    <dd>
+                                        <xref keyref="upgrade-pam"/></dd>
+                                    <dd>
+                                        <xref keyref="pam-snapshots"/></dd>
+                                    <dd><xref keyref="pam-troubleshooting">Creating and managing
+                                            workspaces</xref></dd>
+                                </dlentry>
+                            </dl>
+                        </entry>
+                        <entry>
+                            <dl>
+                                <dlentry>
+                                    <dt>Docs for related <ph conkeyref="ProductNames/puppet"/>
+                                        products</dt>
+                                    <dd><xref keyref="ext-cd4pe"><ph conkeyref="ProductNames/cd"/></xref></dd>
+                                    <dd><xref keyref="ext-comply"><ph conkeyref="ProductNames/comply"/></xref></dd>
+                                </dlentry>
+                            </dl>
+                            <dl>
+                                <dlentry>
+                                    <dt>Get support</dt>
+                                    <dd><xref keyref="ext-support">Support</xref></dd>
+                                    <dd><xref keyref="ext-supportplans">Upgrade your support plan</xref>
+                                    </dd>
+                                </dlentry>
+                            </dl>
+                            <dl>
+                                <dlentry>
+                                    <dt>Share and contribute</dt>
+                                    <dd>
+                                        <xref keyref="ext-puppetcommunity">Engage with the Puppet community</xref>
+                                    </dd>
+                                    <dd>
+                                        <xref keyref="ext-forge">Puppet Forge</xref></dd>
+                                    <dd>
+                                        <xref keyref="ext-ghpuppetlabs">Open source projects from Puppet on
+                                            GitHub</xref>
+                                    </dd>
+                                </dlentry>
+                            </dl>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </conbody>
+</concept>

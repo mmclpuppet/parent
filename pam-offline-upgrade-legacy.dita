@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="pam-offline-upgrade-legacy">
+    <title><ph conkeyref="ProductNames/pam_long"/> offline legacy upgrades</title>
+    <shortdesc> Use this method to upgrade <ph conkeyref="ProductNames/pam_long">online </ph> on
+        offline nodes from a version installed before April 2021.</shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-19"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <context>
+            <p>To upgrade <ph conkeyref="ProductNames/pam_long">online </ph> on nodes without a
+                connection to the internet:</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>From a workstation with internet access, download the latest version of the
+                    cluster installation bundle (note that this bundle is ~4GB):</cmd>
+                <info>
+                    <codeblock translate="no">https://k8s.kurl.sh/bundle/puppet-application-manager-legacy.tar.gz</codeblock>
+                </info>
+            </step>
+            <step>
+                <cmd>Copy the installation bundle to your primary <ph
+                        conkeyref="ProductNames/pam_long"/> node and unpack it:</cmd>
+                <info>
+                    <p>
+                        <codeblock translate="no">tar xzf puppet-application-manager-legacy.tar.gz</codeblock>
+                    </p>
+                </info>
+            </step>
+            <step>
+                <cmd>Run the installation command:</cmd>
+                <info>
+                    <codeblock translate="no">cat install.sh | sudo bash -s airgap </codeblock>
+                </info>
+            </step>
+        </steps>
+        <postreq>When the deployment is complete, sign into <ph conkeyref="ProductNames/pam_long"/>
+            and verify that the new version number is displayed in the bottom center of the web UI. </postreq>
+    </taskbody>
+</task>

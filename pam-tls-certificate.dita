@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="tls_certificate">
+    <title>Update the <ph conkeyref="ProductNames/pam_long"/> TLS certificate</title>
+    <shortdesc>A self-signed TLS certificate secures the connection between your browser and <ph
+            conkeyref="ProductNames/pam_long"/>. Once the initial <ph
+            conkeyref="ProductNames/pam_long"/> setup process is complete, you can upload new
+        certificates by enabling changes to the installation's <ph
+            conkeyref="ProductNames/kubernetes"/> secrets. </shortdesc>
+    <prolog>
+        <author type="creator">Mindy Moreland</author>
+        <critdates>
+            <created date="2021/02/05"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <context>Use this process if you chose not to add a TLS certificate when installing <ph
+                conkeyref="ProductNames/pam_long"/>, or if you need to update your existing TLS
+            certificate.</context>
+        <steps>
+            <step>
+                <cmd>Enable changes to your installation's <codeph translate="no"
+                        >kotsadm-tls</codeph>
+                    <ph conkeyref="ProductNames/kubernetes"/> secret by running:</cmd>
+                <info>
+                    <codeblock translate="no">kubectl -n default annotate secret kotsadm-tls acceptAnonymousUploads=1</codeblock>
+                </info>
+            </step>
+            <step>
+                <cmd>Restart the <codeph translate="no">kurl-proxy</codeph> pod to deploy the change
+                    by running:</cmd>
+                <info>
+                    <codeblock translate="no">kubectl delete pods $(kubectl get pods -A | grep kurl-proxy | awk '{print $2}')</codeblock>
+                </info>
+            </step>
+            <step>
+                <cmd>Once the kurl-rpoxy pod restarts and is back up and running, navigate to
+                        <codeph translate="no">https://&lt;HOSTNAME>:8800/tls</codeph> and upload
+                    your new TLS certificate.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task>

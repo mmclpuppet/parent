@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="pam-components">
+    <title><ph conkeyref="ProductNames/pam_long">online </ph> components</title>
+    <shortdesc><ph conkeyref="ProductNames/pam_long">online </ph> uses a range of mandatory and
+        optional components.</shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-26"/>
+        </critdates>
+    </prolog>
+    <refbody>
+        <section id="pam-support-services">
+            <title>Support services</title>
+            <ul>
+                <li>Database: <ph conkeyref="ProductNames/postgresql"/> (single instance) - <xref
+                        keyref="ext-postgresql"/>
+                </li>
+                <li>Object storage: previously <ph conkeyref="ProductNames/minio"/> - <xref
+                        keyref="ext-minio"/>, now <ph conkeyref="ProductNames/ceph"/> - <xref
+                        keyref="ext-ceph"/></li>
+                <li>tlser for basic TLS cert management - <xref keyref="ext-tlser"/></li>
+                <li>kurl_proxy for HTTPS proxying outside the Ingress
+                    (ports besides 80/443): <xref keyref="ext-kurlproxy"/></li>
+            </ul>
+        </section>
+        <section id="pam-k8s-components">
+            <title><ph conkeyref="ProductNames/kubernetes"/> components</title>
+            <ul>
+                <li>Networking (CNI): <ph conkeyref="ProductNames/weave"/> - <xref
+                        keyref="ext-weave"/></li>
+                <li>Storage (CSI): <ph conkeyref="ProductNames/rook"/> - <xref keyref="ext-rook"/>,
+                        <ph conkeyref="ProductNames/ceph"/> - <xref keyref="ext-ceph"/></li>
+                <li>Ingress: <ph conkeyref="ProductNames/project-contour"/> - <xref
+                        keyref="ext-projectcontour"/></li>
+                <li>Kubernetes Cluster: <ph conkeyref="ProductNames/kurl"/> - <xref
+                        keyref="ext-kurl"/>
+                </li>
+                <li>Embedded <ph conkeyref="ProductNames/kurl"/> Cluster Operator: <ph
+                        conkeyref="ProductNames/ekco"/> - <xref keyref="ext-ekco"/></li>
+                <li>Admin Console: <ph conkeyref="ProductNames/kots"/> - <xref keyref="ext-kots"
+                    /></li>
+                <li>Snapshots: <ph conkeyref="ProductNames/velero"/> - <xref keyref="ext-velero"/>,
+                    Restic - <xref keyref="ext-restic"/></li>
+                <li>Monitoring: <ph conkeyref="ProductNames/prometheus"/> - <xref
+                        keyref="ext-prometheus"/></li>
+                <li>Registry: <ph conkeyref="ProductNames/docker"/> Registry - <xref
+                        keyref="ext-dockerregistry"/></li>
+            </ul>
+        </section>
+        <section id="pam-optional-components">
+            <title>Optional components</title>
+            <p><ph conkeyref="ProductNames/prometheus"/> (+<ph conkeyref="ProductNames/grafana"/>)
+                and Velero (+Restic) are optional components:</p>
+            <ul>
+                <li><ph conkeyref="ProductNames/prometheus"/>+<ph conkeyref="ProductNames/grafana"/>
+                    uses 112m/node + 600m CPU, 200MiB/node + 1750MiB RAM</li>
+                <li><ph conkeyref="ProductNames/velero"/>+Restic uses 500m/node + 500m CPU,
+                    512MiB/node + 128MiB RAM</li>
+            </ul>
+            <p>If you do not need these optional components, they can be omitted from the initial
+                install and further upgrades with a patch similar to the following:</p>
+            <codeblock translate="no">apiVersion: cluster.kurl.sh/v1beta1
+kind: Installer
+metadata:
+  name: patch
+spec:
+  prometheus:
+    version: ''
+  velero:
+    version: ''
+</codeblock>
+            <p>If you want to remove optional components that are already installed, use the
+                following command:</p>
+            <codeblock translate="no">kubectl delete ns/monitoring ns/velero</codeblock>
+        </section>
+        <section id="pam-load-balancing">
+            <title>Load balancing</title>
+            <p>The following load balancer requirements are needed for a HA install:</p>
+            <ul conref="conref-task.dita#pam-conref-task/pam-lb-reqs">
+                <li/>
+            </ul>
+            <note type="important">If you are using application load balancing, be aware that
+                Ingress items use Server Name Indication (SNI) to route requests, which may require
+                additional configuration with your load balancer. If your load balancer does not
+                support SNI for health checks, enable <uicontrol>Enable load balancer HTTP health
+                    check</uicontrol> in the <ph conkeyref="ProductNames/pam_long">online </ph> UI
+                    <wintitle>Config</wintitle> page .</note>
+        </section>
+    </refbody>
+</reference>

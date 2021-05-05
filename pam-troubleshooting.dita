@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="pam-troubleshooting">
+    <title>Troubleshooting <ph conkeyref="ProductNames/pam_long"/></title>
+    <shortdesc>Use this guide to troubleshoot issues with your <ph conkeyref="ProductNames/pam_long"
+        /> installation.</shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-16"/>
+        </critdates>
+    </prolog>
+    <conbody/>
+</concept>

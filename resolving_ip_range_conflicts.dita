@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="resolving_ip_range_conflicts">
+    <title>Resolve IP address range conflicts</title>
+    <shortdesc>When installing <ph conkeyref="ProductNames/pam_long"/>, IP address ranges <codeph
+            translate="no">10.96.0.0/22</codeph> and <codeph translate="no">10.32.0.0/22</codeph>
+        must not be used by other nodes on the local network. To resolve IP address range conflicts,
+        create a <codeph translate="no">patch.yaml</codeph> file and add the
+            <codeph>installer-spec-file=patch.yaml</codeph> argument when running the installation
+        script.</shortdesc>
+    <prolog>
+        <author type="creator">Mindy Moreland</author>
+        <critdates>
+            <created date="2020/08/07"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <steps>
+            <step>
+                <cmd>If you use IP addresses internally that overlap <b><codeph translate="no"
+                            >10.32.0.0/22</codeph></b>, add the following to your <codeph
+                        translate="no">patch.yaml</codeph> file (<codeph translate="no"
+                        >10.40.0.0/22</codeph> used here as an example range):</cmd>
+                <info>
+                    <codeblock translate="no">apiVersion: cluster.kurl.sh/v1beta1
+kind: Installer
+metadata:
+  name: patch
+spec:
+  weave:
+    podCIDR: 10.40.0.0/22</codeblock>
+                </info>
+            </step>
+            <step>
+                <cmd>If you use IP addresses internally that overlap <b><codeph translate="no"
+                            >10.96.0.0/22</codeph></b>, add the following to your <codeph
+                        translate="no">patch.yaml</codeph> file (<codeph translate="no"
+                        >10.100.0.0/16</codeph> used here as an example range):</cmd>
+                <info>
+                    <codeblock translate="no">spec:
+  ...
+  kubernetes:
+    serviceCIDR: 10.100.0.0/16</codeblock>
+                </info>
+                <info>
+                    <note type="caution">The <codeph translate="no">podCIDR</codeph> and <codeph
+                            translate="no">serviceCIDR</codeph> ranges must not overlap.</note>
+                </info>
+            </step>
+            <step>
+                <cmd>Once your <codeph translate="no">patch.yaml</codeph> file is set up, add the
+                        <codeph>installer-spec-file=patch.yaml</codeph> argument when you run the
+                    installation script: </cmd>
+                <info>
+                    <codeblock translate="no">cat install.sh | sudo bash -s airgap installer-spec-file=patch.yaml</codeblock>
+                </info>
+                <info>
+                    <note type="remember">Add the <codeph>installer-spec-file=patch.yaml</codeph>
+                        argument any time you re-run the installation script, such as when
+                        reinstalling to upgrade to a new version. </note>
+                </info>
+            </step>
+        </steps></taskbody>
+</task>

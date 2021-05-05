@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="pam-offline-upgrade">
+    <title>Upgrade <ph conkeyref="ProductNames/pam_long"/> offline</title>
+    <shortdesc>Users operating in environments without direct access to the internet must use the
+        links below to upgrade to the latest version of <ph conkeyref="ProductNames/pam_long"/>. </shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-19"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <context>
+            <p>To upgrade <ph conkeyref="ProductNames/pam_long"/>:</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>From a workstation with internet access, download the latest version of the
+                    installation bundle that is relevant for your installation type:</cmd>
+                <info>For standalone installations, enter the following command (note that this
+                    bundle is
+                        ~6GB):<codeblock translate="no">https://k8s.kurl.sh/bundle/puppet-application-manager-standalone.tar.gz</codeblock><p>For
+                        HA installations, enter the following command (note that this bundle is
+                        ~4GB):</p><codeblock translate="no">https://k8s.kurl.sh/bundle/puppet-application-manager.tar.gz</codeblock></info>
+            </step>
+            <step>
+                <cmd>Copy the installation bundle to your primary <ph
+                        conkeyref="ProductNames/pam_long"/> server and unpack it:</cmd>
+                <info>
+                    <p>For standalone installations,
+                        use:<codeblock translate="no">tar xzf puppet-application-manager-standalone.tar.gz</codeblock></p>
+                    <p>For HA installations,
+                        use:<codeblock translate="no">tar xzf puppet-application-manager.tar.gz</codeblock></p>
+                </info>
+            </step>
+            <step>
+                <cmd>Run the installation command:</cmd>
+                <info>
+                    <codeblock translate="no">cat install.sh | sudo bash -s airgap </codeblock>
+                </info>
+            </step>
+            <step>
+                <cmd>If a new version of <ph conkeyref="ProductNames/kubernetes"/> is available, the
+                    installer systems provide upgrade scripts to run on other nodes in an HA
+                    cluster. The installer also pauses before draining nodes as part of the <ph
+                        conkeyref="ProductNames/kubernetes"/> upgrade. Node draining is performed as
+                    part of a <ph conkeyref="ProductNames/kubernetes"/> upgrade.</cmd>
+                <info>The node draining process can take several minutes to complete, during which
+                    time application workloads are stopped or migrated to other systems. This
+                    migration may cause several minutes of downtime while databases are
+                    rescheduled.</info>
+            </step>
+        </steps>
+        <postreq>When the deployment is complete, sign into <ph conkeyref="ProductNames/pam_long"/>
+            and verify that the new version number is displayed in the bottom left corner of the web
+            UI. </postreq>
+    </taskbody>
+</task>

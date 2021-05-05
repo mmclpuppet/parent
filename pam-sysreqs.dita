@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="pam-sysreqs">
+    <title><ph conkeyref="ProductNames/pam_long"/> system requirements</title>
+    <shortdesc>Before installing <ph conkeyref="ProductNames/pam_long"/>, ensure that your system
+        meets these requirements. </shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-13"/>
+        </critdates>
+    </prolog>
+    <refbody>
+        <section id="pam-hw-reqs">
+            <title>Hardware requirements</title>
+            <p>While <ph conkeyref="ProductNames/pam_long"/> can be installed on a single standalone
+                server, choose an HA configuration if you want the application to be tolerant of
+                node failures.</p>
+            <p>For standalone implementations:</p>
+            <p conref="conref-task.dita#sa-install/sa-sysreqs-table"/>
+            <p>For HA implementations, each server must meet the following minimum
+                requirements. Secondaries must only be added after setting up 3 primaries:</p>
+            <p conref="conref-task.dita#pam-conref-task/ha-sysreqs-table"/>
+            <p>Hardware requirements for individual applications. </p>
+        </section>
+        <section id="hw-reqs-apps">
+            <title>Hardware requirements for individual applications</title>
+            <p>For HA, all CPU and memory requirements can be split across multiple nodes as they
+                are composed of a number of smaller services. Estimates for the HA configuration
+                include a buffer to account for node failure, but must take into account node
+                failure. However, using secondary nodes smaller than 4 CPU and 8 GB memory is not
+                recommended. Storage must be applied to each primary node where application-specific
+                storage is required.</p>
+            <table>
+                <tgroup cols="4">
+                    <colspec colname="col1" colnum="1"/>
+                    <colspec colname="col2" colnum="2"/>
+                    <colspec colname="col3" colnum="3"/>
+                    <colspec colname="col4" colnum="4"/>
+                    <tbody>
+                        <row>
+                            <entry><b>Application</b></entry>
+                            <entry><b>Memory</b></entry>
+                            <entry><b>Storage</b></entry>
+                            <entry><b>CPU</b></entry>
+                        </row>
+                        <row>
+                            <entry><ph conkeyref="ProductNames/cd"/> with a small team</entry>
+                            <entry>4 GB</entry>
+                            <entry>30 GB</entry>
+                            <entry>2 CPU</entry>
+                        </row>
+                        <row>
+                            <entry><ph conkeyref="ProductNames/cd"/> for several teams and/or
+                                HA</entry>
+                            <entry>8 GB</entry>
+                            <entry>50 GB</entry>
+                            <entry>3 CPU</entry>
+                        </row>
+                        <row>
+                            <entry><ph conkeyref="ProductNames/comply_long"/> Standalone with a
+                                small team</entry>
+                            <entry>4 GB</entry>
+                            <entry>30 GB</entry>
+                            <entry>4 CPU</entry>
+                        </row>
+                        <row>
+                            <entry><ph conkeyref="ProductNames/comply_long"/> for several teams
+                                and/or HA</entry>
+                            <entry>6 GB</entry>
+                            <entry>50 GB</entry>
+                            <entry>6 CPU</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <note> Installing <ph conkeyref="ProductNames/cd"/> and <ph
+                    conkeyref="ProductNames/comply_long"/> using the same instance is not currently
+                supported. This feature is on the roadmap for an up-coming release.</note>
+            <p><b>Example: HA cluster with <ph conkeyref="ProductNames/cd"/></b></p>
+            <p dir="ltr">An HA cluster capable of running <ph conkeyref="ProductNames/cd"/> requires
+                3 CPU and 8 GB storage in addition to per-node baselines. The cluster can be created
+                thus:</p>
+            <ul>
+                <li>3 primaries with 4 CPU and 8 GB memory which provides an excess 3 GB of memory
+                    for application workloads. Each primary must have 100 GB storage in an
+                    unformatted partition for <ph conkeyref="ProductNames/ceph"/> and 100 GB for
+                        <codeph translate="no">/var/lib</codeph>.</li>
+            </ul>
+            <p><b>Example: HA cluster with Puppet Comply</b></p>
+            <p>An HA cluster capable of running Puppet Comply requires 6 CPU and 6 GB storage in
+                addition to per-node baselines. The cluster can be created thus:</p>
+            <ul>
+                <li>3 primaries with 4 CPU and 8 GB memory, which provides an excess 3 GB of memory
+                    for application workloads. Each primary must have 100 GB storage in an
+                    unformatted partition for <ph conkeyref="ProductNames/ceph"/> and 100 GB for
+                        <codeph translate="no">/var/lib</codeph>.</li>
+                <li>2 secondaries with 4 CPU and 8 GB memory which provides an excess 6 CPUs and 13
+                    GB of memory for application workloads. Each secondary must have 80 GB for
+                        <codeph translate="no">/var/lib</codeph>.</li>
+            </ul>
+            <p><b>Example: HA cluster with both</b></p>
+            <p>An HA cluster capable of running both <ph conkeyref="ProductNames/cd"/> and <ph
+                    conkeyref="ProductNames/comply_long"/> requires 9 CPUs and 14 GB storage in
+                addition to per-node baselines. The cluster can be created thus:</p>
+            <ul>
+                <li>3 primaries with 4 CPU and 8 GB memory, which provides an excess 3 GB of memory
+                    for application workloads. Each primary must have 150 GB storage in an
+                    unformatted partition for <ph conkeyref="ProductNames/ceph"/> and 100 GB for
+                        <codeph translate="no">/var/lib</codeph>.</li>
+                <li>3 secondaries with 4 CPU and 8 GB memory which provides an excess 9 CPUs and
+                    19.5 GB of memory for application workloads. Each secondary must have 80 GB for
+                        <codeph translate="no">/var/lib</codeph>.</li>
+            </ul>
+            <p>Or, with larger nodes:</p>
+            <ul>
+                <li>3 primaries with 8 CPU and 12 GB memory which provides an excess 12 CPUs and 15
+                    GB of memory for application workloads. Each primary must have 150 GB storage in
+                    an unformatted partition for <ph conkeyref="ProductNames/ceph"/> and 100 GB for
+                        <codeph translate="no">/var/lib</codeph>.</li>
+            </ul>
+        </section>
+        <section id="pam-port-reqs">
+            <title>Open port requirements</title>
+            <p><ph conkeyref="ProductNames/pam_long"/> uses the following ports: </p>
+            <table frame="all">
+                <tgroup align="left" cols="5">
+                    <colspec colname="c1" colnum="1" colwidth="1*"/>
+                    <colspec colname="c2" colnum="2" colwidth="1*"/>
+                    <colspec colname="c3" colnum="3" colwidth="1*"/>
+                    <colspec colname="c4" colnum="4" colwidth="1*"/>
+                    <colspec colname="c5" colnum="5" colwidth="1*"/>
+                    <thead>
+                        <row>
+                            <entry>Port</entry>
+                            <entry>Protocol</entry>
+                            <entry>Purpose</entry>
+                            <entry>Source</entry>
+                            <entry>Destination</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry nameend="c5" namest="c1"><i><ph conkeyref="ProductNames/pam_long"
+                                    /> ports</i></entry>
+                        </row>
+                        <row>
+                            <entry>443</entry>
+                            <entry>TCP</entry>
+                            <entry>Web UI</entry>
+                            <entry>Browser</entry>
+                            <entry><ph conkeyref="ProductNames/pam_long"/></entry>
+                        </row>
+                        <row>
+                            <entry>8000</entry>
+                            <entry>TCP</entry>
+                            <entry>Webhook service</entry>
+                            <entry>Source control </entry>
+                            <entry><ph conkeyref="ProductNames/pam_long"/></entry>
+                        </row>
+                        <row>
+                            <entry nameend="c5" namest="c1"><i>Platform ports</i></entry>
+                        </row>
+                        <row>
+                            <entry>2379</entry>
+                            <entry>TCP</entry>
+                            <entry morerows="1">High availability (HA) communication</entry>
+                            <entry morerows="1">etcd on the <ph conkeyref="ProductNames/kubernetes"
+                                /> host</entry>
+                            <entry morerows="1">etcd on the <ph conkeyref="ProductNames/kubernetes"
+                                /> host</entry>
+                        </row>
+                        <row>
+                            <entry>2380</entry>
+                            <entry>TCP</entry>
+                        </row>
+                        <row>
+                            <entry>6443</entry>
+                            <entry>TCP</entry>
+                            <entry><ph conkeyref="ProductNames/kubernetes"/> API</entry>
+                            <entry>Admin workstation</entry>
+                            <entry><ph conkeyref="ProductNames/kubernetes"/> host</entry>
+                        </row>
+                        <row>
+                            <entry>6783</entry>
+                            <entry>TCP/UDP</entry>
+                            <entry morerows="1"><ph conkeyref="ProductNames/kubernetes"/> networking
+                                - <ph conkeyref="ProductNames/weave"/></entry>
+                            <entry morerows="1"><ph conkeyref="ProductNames/kubernetes"/>
+                                host</entry>
+                            <entry morerows="1"><ph conkeyref="ProductNames/kubernetes"/>
+                                host</entry>
+                        </row>
+                        <row>
+                            <entry>6784</entry>
+                            <entry>UDP</entry>
+                        </row>
+                        <row>
+                            <entry>8800</entry>
+                            <entry>TCP</entry>
+                            <entry><ph conkeyref="ProductNames/pam_long"/></entry>
+                            <entry>Admin browser</entry>
+                            <entry><ph conkeyref="ProductNames/kubernetes"/> host</entry>
+                        </row>
+                        <!--<row>
+                            <entry>9001 (offline installations only)</entry>
+                            <entry>TCP</entry>
+                            <entry>Local registry for offline installations</entry>
+                            <entry>Job hardware</entry>
+                            <entry><ph conkeyref="ProductNames/kubernetes"/> host</entry>
+                        </row>-->
+                        <row>
+                            <entry>10250</entry>
+                            <entry>TCP</entry>
+                            <entry><ph conkeyref="ProductNames/kubernetes"/> cluster
+                                management</entry>
+                            <entry><ph conkeyref="ProductNames/kubernetes"/> host</entry>
+                            <entry><ph conkeyref="ProductNames/kubernetes"/> host</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <note type="remember">Applications that you install with <ph
+                    conkeyref="ProductNames/pam_long"/> may require other ports to be open. For more
+                information on application-specific port requirements, check the relevant
+                application documentation.</note>
+        </section>
+        <section id="pam-ip-range-reqs">
+            <title>IP address range requirements</title>
+            <p conkeyref="pam-conref-task/pam-ip-range"/>
+        </section>
+        <section id="pam-url-reqs">
+            <title>Web URL requirements for firewalls</title>
+            <p><ph conkeyref="ProductNames/pam_long"/> interacts with external web URLs for a
+                variety of installation, configuration, upgrade, and deployment tasks. The following
+                list of web URLs are used by <ph conkeyref="ProductNames/pam_long"/> for internal
+                and outbound network traffic. </p>
+            <table frame="all">
+                <tgroup cols="2">
+                    <colspec colname="c1" colnum="1" colwidth="1*"/>
+                    <colspec colname="c2" colnum="2" colwidth="1*"/>
+                    <thead>
+                        <row>
+                            <entry>Category</entry>
+                            <entry>URLs</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry><ph conkeyref="ProductNames/pam_long"/> and platform</entry>
+                            <entry>
+                                <ul>
+                                    <li>get.replicated.com</li>
+                                    <li>registry.replicated.com</li>
+                                    <li>proxy.replicated.com</li>
+                                    <li>api.replicated.com</li>
+                                    <li>k8s.kurl.sh</li>
+                                    <li>kurl-sh.s3.amazonaws.com</li>
+                                    <li>replicated.app</li>
+                                    <li>registry-data.replicated.com</li>
+                                </ul>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Container registries</entry>
+                            <entry>
+                                <ul>
+                                    <li>gcr.io</li>
+                                    <li>docker.io</li>
+                                    <li>index.docker.io</li>
+                                    <li>registry-1.docker.io</li>
+                                    <li>auth.docker.io</li>
+                                    <li>production.cloudflare.docker.com</li>
+                                    <li>quay.io</li>
+                                </ul>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry><ph conkeyref="ProductNames/pe_long"/></entry>
+                            <entry>
+                                <ul>
+                                    <li>pup.pt</li>
+                                    <li>forgeapi.puppet.com</li>
+                                    <li>pm.puppetlabs.com</li>
+                                    <li>amazonaws.com</li>
+                                    <li>s3.amazonaws.com</li>
+                                    <li>rubygems.org</li>
+                                </ul>
+                            </entry>
+                        </row>
+                        <!--<row>
+                            <entry>Source control</entry>
+                            <entry>The URL of your external source control provider, if
+                                applicable.</entry>
+                        </row>-->
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        <section id="pam-antivirus">
+            <title>Antivirus and antimalware considerations</title>
+            <p>Antivirus and antimalware software can impact <ph conkeyref="ProductNames/pam_long"/>
+                and its applications or prevent them from functioning properly. </p>
+            <p>To avoid issues, exclude the following directories from antivirus and antimalware
+                tools that scan disk write operations:<ul>
+                    <li><codeph translate="no">/var/openebs</codeph> (Standalone)</li>
+                    <li><codeph translate="no">/var/lib/rook</codeph> (HA)</li>
+                    <li><codeph translate="no">/var/lib/docker</codeph></li>
+                    <li><codeph translate="no">/var/lib/kubelet</codeph></li>
+                </ul></p>
+        </section>
+        <section id="pam-supported-os">
+            <title>Supported operating systems</title>
+            <p><ph conkeyref="ProductNames/pam_long"/> can be installed on these operating
+                systems:</p>
+            <table frame="all">
+                <tgroup align="left" cols="2">
+                    <colspec colname="c1" colnum="1" colwidth="1*"/>
+                    <colspec colname="c2" colnum="2" colwidth="1*"/>
+                    <thead>
+                        <row>
+                            <entry>Operating system</entry>
+                            <entry>Supported versions</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry><ph conkeyref="ProductNames/centos"/></entry>
+                            <entry>7.4, 7.5, 7.6, 7.7, 7.8, 7.9<p>8.1, 8.2, 8.3</p></entry>
+                        </row>
+                        <row>
+                            <entry><ph conkeyref="ProductNames/rhel_plus_init"/></entry>
+                            <entry>7.4, 7.5, 7.6, 7.7, 7.8, 7.9<p>8.1, 8.2, 8.3</p></entry>
+                        </row>
+                        <row>
+                            <entry><ph conkeyref="ProductNames/ubuntu"/> (General availability
+                                kernels)</entry>
+                            <entry>16.04 (on PE versions prior to 2019.8)
+                                <p>18.04</p><p>20.04</p></entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        <section id="pam-supported-browsers">
+            <title>Supported browsers</title>
+            <p>The following browsers are supported for use with the <ph
+                    conkeyref="ProductNames/pam_long"/> UI: </p>
+            <table>
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Browser</entry>
+                            <entry>Supported versions</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>Google Chrome</entry>
+                            <entry>Current version as of release</entry>
+                        </row>
+                        <row>
+                            <entry>Mozilla Firefox</entry>
+                            <entry>Current version as of release</entry>
+                        </row>
+                        <row>
+                            <entry>Microsoft Edge</entry>
+                            <entry>Current version as of release</entry>
+                        </row>
+                        <row>
+                            <entry>Apple Safari </entry>
+                            <entry>Current version as of release</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+    </refbody>
+</reference>

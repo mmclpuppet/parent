@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="pam-ha-offline-install">
+    <title><ph conkeyref="ProductNames/pam_long"/> HA offline install </title>
+    <shortdesc></shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-13"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <prereq>
+            <ol>
+                <li conref="conref-task.dita#pam-conref-task/install-prereq1"
+                    conrefend="conref-task.dita#pam-conref-task/install-prereq2"/>
+                <li>Ensure that the nodes can resolve their own hostnames, through either local host
+                    mapping or a reachable DNS server. </li>
+            </ol>
+        </prereq>
+        <context>This installation process results in a basic <ph conkeyref="ProductNames/pam_long"
+            /> instance that is configured for optional high availability. Installation takes
+            several (mostly hands-off) minutes to complete. </context>
+        <steps>
+            <step conref="conref-task.dita#pam-conref-task/install-lb">
+                <cmd/>
+            </step>
+            <step>
+                <cmd>From a workstation with internet access, download the cluster installation
+                    bundle (note that this bundle is ~4GB):</cmd>
+                <info>
+                    <codeblock translate="no">https://k8s.kurl.sh/bundle/puppet-application-manager.tar.gz</codeblock>
+                </info>
+            </step>
+            <step>
+                <cmd>Copy the installation bundle to the host node and unpack it:</cmd>
+                <info>
+                    <p>
+                        <codeblock translate="no">tar xzf puppet-application-manager.tar.gz</codeblock>
+                    </p>
+                </info>
+            </step>
+            <step>
+                <cmd>Run the installation command:</cmd>
+                <info>
+                    <codeblock translate="no">cat install.sh | sudo bash -s airgap </codeblock>
+                    <note conref="conref-task.dita#pam-conref-task/storage-note"/>
+                </info>
+                <substeps>
+                    <substep conref="conref-task.dita#pam-conref-task/install-substep1"
+                        conrefend="conref-task.dita#pam-conref-task/install-substep2">
+                        <cmd/>
+                    </substep>
+                </substeps>
+            </step>
+            <step>
+                <cmd>Follow instructions outlined after the following line in the install
+                    script:</cmd>
+                <info>
+                    <codeblock translate="no">To add MASTER nodes to this installation, copy and unpack this bundle on your other nodes, and run the following: 
+cat ./join.sh | sudo bash -s airgap 
+kubernetes-master-address=...</codeblock>
+                </info>
+            </step>
+            <step conref="conref-task.dita#pam-conref-task/step-addnodes">
+                <cmd/>
+            </step>
+            <step conref="conref-task.dita#pam-conref-task/step-complete-install">
+                <cmd/>
+            </step>
+        </steps>
+        <postreq>
+            <draft-comment author="michael.mcloughlin" translate="no">Need to decide where
+                individual app install instructions live.</draft-comment>
+            <p>Follow the instructions for installing your <ph conkeyref="ProductNames/puppet"/>
+                applications on <ph conkeyref="ProductNames/pam_long"/>.</p>
+            <p conref="conref-task.dita#pam-conref-task/install-cd4pe-offline"/>
+            <p conref="conref-task.dita#pam-conref-task/install-comply-offline"/>
+        </postreq>
+    </taskbody>
+</task>

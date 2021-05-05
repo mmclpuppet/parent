@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="pam-ui">
+    <title><ph conkeyref="ProductNames/pam_long"/> UI</title>
+    <shortdesc>The <ph conkeyref="ProductNames/pam_long"/> UI provides administration functionality
+        where you can access and manage your <ph conkeyref="ProductNames/puppet"/>
+        applications.</shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-26"/>
+        </critdates>
+    </prolog>
+    <refbody><section id="pam-admin-menu">
+            <title><ph conkeyref="ProductNames/pam_long"/> console menu</title>
+            <p>Use the console menu at the top of the <ph conkeyref="ProductNames/pam_long"/> UI to
+                manage <ph conkeyref="ProductNames/pam_long"/> itself. It has 4 tabs:</p>
+            <ul>
+                <li>Use the <uicontrol>Dashboard</uicontrol> tab to: <ul>
+                        <li>Manage your applications</li>
+                        <li>See version history</li>
+                        <li>Set application configuration settings</li>
+                        <li>Access support bundles for troubleshooting</li>
+                        <li>Manage licenses</li>
+                        <li>View files</li>
+                        <li>Configure registry settings</li>
+                    </ul></li>
+                <li>Use the <uicontrol>GitOps</uicontrol> tab to deploy a GitOps worksflow in which
+                    you can connect to a Git version control system and commit any changes directly
+                    to Git repository.</li>
+                <li>Use the <uicontrol>Cluster Management</uicontrol> tab to view current
+                    information on the nodes in your cluster. You can also use this tab to drain,
+                    and add nodes to your cluster.</li>
+                <li>Use the <uicontrol>Snapshots</uicontrol> tab to create point-in-time backups of
+                    your deployment, which can be used to roll back to a previous state, or restore
+                    your installation into a new cluster for disaster recovery. For more
+                    information, see <xref keyref="pam-snapshots"/>.</li>
+            </ul>
+            <p>You can also use the console menu to <uicontrol>Add a new application</uicontrol> and
+                to log out of <ph conkeyref="ProductNames/pam_long"/>.</p>
+        </section></refbody>
+</reference>

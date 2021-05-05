@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="high-availability">
+    <title>How to install a load balancer</title>
+    <shortdesc>After the initial installation process is complete, create a highly available <ph
+            conkeyref="ProductNames/cd"/> architecture by adding a load balancer and additional
+        control nodes. </shortdesc>
+    <prolog>
+        <author type="creator">Mindy Moreland</author>
+        <critdates>
+            <created date="2020/10/20"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <prereq>Review the architecture diagram for <xref
+                href="cd-architecture-tls.dita#cd-architecture-tls/ha-diagram">Installation with a
+                proxy or load balancer using enhanced TLS</xref>.</prereq>
+        <context/>
+        <steps>
+            <step>
+                <cmd>Create a load balancer for your <ph conkeyref="ProductNames/pam_long"/>
+                    cluster.  Depending on the <ph conkeyref="ProductNames/puppet"/>  products you
+                    are installing forward the relevant ports. For more information, see <xref
+                        keyref="pam-port-forwarding"/>.</cmd>
+            </step>
+            <step>
+                <cmd>Add the IP address of the control node on which <ph
+                        conkeyref="ProductNames/pam_long"/> is installed to the load balancer.
+                </cmd>
+            </step>
+            <step>
+                <cmd>Verify that load balancer health checks are succeeding.</cmd>
+            </step>
+            <step>
+                <cmd>Update the DNS entry for the <ph conkeyref="ProductNames/pam_long"/> service
+                    that you created in step 1 of the installation instructions. This entry must now
+                    point to the load balancer's IP address.</cmd>
+            </step>
+            <step>
+                <cmd>Add at least two additional control plane nodes to your cluster.</cmd>
+                <substeps>
+                    <substep>
+                        <cmd>In the platform admin console, click <uicontrol>Cluster
+                                Management</uicontrol>. Your <ph conkeyref="ProductNames/cd"/>
+                            control node's details are listed here.</cmd>
+                    </substep>
+                    <substep>
+                        <cmd>Click <uicontrol>Add a node</uicontrol>. Select <uicontrol>Master
+                                Node</uicontrol> and wait for the platform admin console to generate
+                            a customized installation command for you. Copy the command.</cmd>
+                    </substep>
+                    <substep>
+                        <cmd>SSH into each new control plane node and run the command. The
+                            installation process takes a few minutes. A <codeph translate="no">node
+                                joined successfully</codeph> message is printed when the process is
+                            complete.</cmd>
+                    </substep>
+                    <substep>
+                        <cmd>Verify that your cluster now has at least three nodes by running
+                                <codeph>kubectl get nodes</codeph>.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step>
+                <cmd>Add the new control plane nodes to the load balancer.</cmd>
+            </step>
+        </steps>
+        <result>Your <ph conkeyref="ProductNames/cd"/> installation is now configured for high
+            availability. </result>
+    </taskbody>
+</task>

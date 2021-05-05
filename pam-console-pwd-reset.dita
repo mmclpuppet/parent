@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="platform_admin_console_password">
+    <title>Reset the <ph conkeyref="ProductNames/pam_long"/> password</title>
+    <shortdesc>As part of the installation process, <ph conkeyref="ProductNames/pam_long"/>
+        generates a password for you. You can update this password to one of your choosing after
+        installation. </shortdesc>
+    <prolog>
+        <author type="creator">Mindy Moreland</author>
+        <critdates>
+            <created date="2020/08/19"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <steps>
+            <step>
+                <cmd>To reset the <ph conkeyref="ProductNames/pam_long"/> password, run: </cmd>
+                <info>
+                    <codeblock translate="no">kubectl -n default kots reset-password</codeblock>
+                </info>
+                <stepresult>The system prompts you to enter a new password of your choosing.
+                </stepresult>
+            </step>
+            <step>
+                <cmd>If the command fails with an <codeph translate="no">unknown command "kots" for
+                        "kubectl"</codeph> error, it's because <codeph translate="no"
+                        >/usr/local/bin</codeph> is not in the path. To address this error, either
+                    update the path to include <codeph translate="no">/usr/local/bin</codeph>, or
+                    run:</cmd>
+                <info>
+                    <codeblock translate="no">/usr/local/bin/kubectl-kots reset-password default</codeblock>
+                </info>
+            </step>
+        </steps></taskbody>
+</task>

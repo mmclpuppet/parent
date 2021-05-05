@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map id="pam-external-links">    
+    <title>pam external links</title>
+    <keydef keys="ext-postgresql" scope="external" format="html" href="https://www.postgresql.org/"/>
+    <keydef keys="ext-minio" scope="external" format="html" href="https://min.io"/>
+    <keydef keys="ext-ceph" scope="external" format="html" href="https://ceph.io"/>
+    <keydef keys="ext-tlser" scope="external" format="html" href="https://github.com/puppetlabs/tlser"/>
+    <keydef keys="ext-kurlproxy" scope="external" format="html" href="https://github.com/replicatedhq/kots/tree/v1.36.1/kurl_proxy"/>
+    <keydef keys="ext-weave" scope="external" format="html" href="https://github.com/weaveworks/weave"/>
+    <keydef keys="ext-rook" scope="external" format="html" href="https://rook.io"/>
+    <keydef keys="ext-projectcontour" scope="external" format="html" href="https://projectcontour.io"/>
+    <keydef keys="ext-kurl" scope="external" format="html" href="https://kurl.sh"/>
+    <keydef keys="ext-ekco" scope="external" format="html" href="https://github.com/replicatedhq/ekco"/>
+    <keydef keys="ext-kots" scope="external" format="html" href="https://kots.io"/>
+    <keydef keys="ext-velero" scope="external" format="html" href="https://velero.io"/>
+    <keydef keys="ext-restic" scope="external" format="html" href="https://restic.net"/>
+    <keydef keys="ext-prometheus" scope="external" format="html" href="https://prometheus.io"/>
+    <keydef keys="ext-grafana" scope="external" format="html" href="https://grafana.com"/>
+    <keydef keys="ext-dockerregistry" scope="external" format="html" href="https://docs.docker.com/registry/"/>
+    <keydef keys="ext-cd4pe" scope="external" format="html" href="https://puppet.com/docs/continuous-delivery/4.x/cd_user_guide.html"/>
+    <keydef keys="ext-comply" scope="external" format="html" href="https://puppet.com/docs/comply/latest/comply.html"/>
+    <keydef keys="ext-support" scope="external" format="html" href="https://support.puppet.com/hc/en-us"/>
+    <keydef keys="ext-supportplans" scope="external" format="html" href="https://puppet.com/support-services/customer-support/support-plans"/>
+    <keydef keys="ext-puppetcommunity" scope="external" format="html" href="https://puppet.com/community"/>
+    <keydef keys="ext-forge" scope="external" format="html" href="https://forge.puppet.com"/>
+    <keydef keys="ext-ghpuppetlabs" scope="external" format="html" href="https://github.com/puppetlabs/"/>
+    <keydef keys="ext-cd4peinstallonline" scope="external" format="html" href="https://puppet.com/docs/continuous-delivery/4.x/cd_install.html">
+        <topicmeta><navtitle>Install Continuous Delivery for PE</navtitle></topicmeta>
+    </keydef>
+    <keydef keys="ext-cd4peinstalloffline" scope="external" format="html" href="https://puppet.com/docs/continuous-delivery/4.x/cd_install_offline.html">
+        <topicmeta><navtitle>Install Continuous Delivery for PE in an offline environment</navtitle></topicmeta>
+    </keydef>
+    <keydef keys="ext-complyinstallonline" scope="external" format="html" href="https://puppet.com/docs/comply/latest/install_comply.html">
+        <topicmeta><navtitle>Install Comply online</navtitle></topicmeta>
+    </keydef>
+    <keydef keys="ext-complyinstalloffline" scope="external" format="html" href="https://puppet.com/docs/comply/latest/comply_install_offline.html">
+        <topicmeta><navtitle>Install Comply offline</navtitle></topicmeta>
+    </keydef>
+</map>

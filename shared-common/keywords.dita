@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept ditaarch:DITAArchVersion="1.2" id="concept-8893" xml:lang="en-us"
+                    xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+                    <title translate="no">keywords</title>
+                    <titlealts>
+                                        <navtitle>keywords</navtitle>
+                                        <searchtitle>keywords</searchtitle>
+                    </titlealts>
+                    <shortdesc translate="no">This page contains keyword elements that writers
+                                        should use in their topics (with the conkeyref property)
+                                        instead of writing out the keywords. That way, we can update
+                                        them easier and maintain consistency. To discuss any changes
+                                        to these, contact kari@puppet.com or raise it as an issue
+                                        with the Tech Pubs team.</shortdesc>
+                    <prolog>
+                                        <author translate="no" type="creator">kari halsted
+                                                  &lt;kari@puppet.com&gt;</author>
+                    </prolog>
+                    <conbody>
+                                        <section translate="no"><title>Insert a keyword in your
+                                                  topic</title><p>
+                                                  <ul>
+                                                  <li><p>Ensure that the maps that call your topic
+                                                  have a keydef entry: <codeph translate="no">
+                                                  &lt;keydef keys="ProductNames"
+                                                  href="keywords.dita"/&gt;</codeph>
+                                                  </p></li>
+                                                  <li><p>In your topic, click <menucascade>
+                                                  <uicontrol>Re-use Content</uicontrol>
+                                                  <uicontrol>Insert Conkeyref</uicontrol>
+                                                  </menucascade>.</p></li>
+                                                  <li><p>In the filter field that pops up, enter or
+                                                  select the keyword ID. For example, to insert
+                                                  "Puppet Enterprise" enter <codeph translate="no"
+                                                  >pe_long</codeph>.</p></li>
+                                                  </ul>
+                                                  </p><p>Sometimes it takes saving, closing,
+                                                  reopening, or even running a build transform
+                                                  before you'll see the keyword's text (instead of
+                                                  ID) appear in your topic.</p><p>If another map
+                                                  uses your topic and needs these keywords to have
+                                                  different values, we can create a different
+                                                  conkeyref file for it to use in the href value in
+                                                  its keydef. Talk to Melissa or Kari to make this
+                                                  happen. Leave plenty of time for setup and
+                                                  testing. <note type="important">No terms in this
+                                                  list should be localized. translate="no" set on
+                                                  all content, intentionally.</note>
+                                                  </p></section>
+                                        <section translate="no"><title>Puppet keywords</title><p>
+                                                  <ph id="pe_long">Puppet Enterprise</ph>
+                                                  </p><p>
+                                                  <ph id="pe_plus_init">Puppet Enterprise (PE)</ph>
+                                                  </p><p>
+                                                  <ph id="pe">PE</ph>
+                                                  </p><p>
+                                                  <ph id="puppet_discovery">Puppet Discovery</ph>
+                                                  </p><p>
+                                                  <ph id="bolt">Bolt</ph>
+                                                  </p><p>
+                                                  <ph id="cm_long">Code Manager</ph>
+                                                  </p><p>
+                                                  <ph id="facter">Facter</ph>
+                                                  </p><p>
+                                                  <ph id="forge">Forge</ph>
+                                                  </p><p>
+                                                  <ph id="hiera">Hiera</ph>
+                                                  </p><p>
+                                                  <ph id="mco">MCollective</ph>
+                                                  </p><p class="- topic/p ">
+                                                  <ph class="- topic/ph " id="nebula_long">Project
+                                                  Nebula</ph>
+                                                  </p><p class="- topic/p ">
+                                                  <ph class="- topic/ph " id="nebula">Nebula</ph>
+                                                  </p><p>
+                                                  <ph id="puppet">Puppet</ph>
+                                                  </p><p>
+                                                  <ph id="puppet_inc">Puppet, Inc.</ph>
+                                                  </p><p>
+                                                  <ph id="pql_long">Puppet Query Language</ph>
+                                                  </p><p>
+                                                  <ph id="pql_plus_init">Puppet Query Language
+                                                  (PQL)</ph>
+                                                  </p><p>
+                                                  <ph id="pql">PQL</ph>
+                                                  </p><p>
+                                                  <ph id="paccess">Puppet Access</ph>
+                                                  </p><p>
+                                                  <ph id="pserver">Puppet Server</ph>
+                                                  </p><p>
+                                                  <ph id="puppetconf">PuppetConf</ph>
+                                                  </p><p>
+                                                  <ph id="puppetdb">PuppetDB</ph>
+                                                  </p><p>
+                                                  <ph id="puppetfile">Puppetfile</ph>
+                                                  </p><p>
+                                                  <ph id="r10k">r10k</ph>
+                                                  </p><p>
+                                                  <ph id="razor">Razor</ph>
+                                                  </p><p>
+                                                  <ph id="pxp_long">Puppet Execution Protocol</ph>
+                                                  </p><p>
+                                                  <ph id="pxp_long_plus_init">Puppet Execution
+                                                  Protocol (PXP)</ph>
+                                                  </p><p>
+                                                  <ph id="pxp">PXP</ph>
+                                                  </p><p>
+                                                  <ph id="pcp_long">Puppet Communications
+                                                  Protocol</ph>
+                                                  </p><p>
+                                                  <ph id="pcp_long_plus_init">Puppet Communications
+                                                  Protocol (PCP)</ph>
+                                                  </p><p>
+                                                  <ph id="pcp">PCP</ph>
+                                                  </p><p>
+                                                  <ph id="pdk_long">Puppet Development Kit</ph>
+                                                  </p><p>
+                                                  <ph id="pdk_long_plus_init">Puppet Development Kit
+                                                  (PDK)</ph>
+                                                  </p><p>
+                                                  <ph id="pdk">PDK</ph>
+                                                  </p><p>
+                                                  <ph id="pp">Puppet Pipelines</ph>
+                                                  </p><p>
+                                                  <ph id="pfc">Pipelines for Containers</ph>
+                                                  </p><p>
+                                                  <ph id="pfa">Pipelines for Applications</ph>
+                                                  </p><p>
+                                                  <ph id="cd_long">Continuous Delivery for Puppet
+                                                  Enterprise</ph>
+                                                  </p><p>
+                                                  <ph id="cd_plus_init">Continuous Delivery for
+                                                  Puppet Enterprise (PE)</ph>
+                                                  </p><p>
+                                                  <ph id="cd">Continuous Delivery for PE</ph>
+                                                  </p><p>
+                                                  <ph id="strings_long">Puppet Strings</ph>
+                                                  </p><p>
+                                                  <ph id="strings">Strings</ph>
+                                                  </p><p>
+                                                  <ph id="plm">Puppet License Manager</ph>
+                                                  </p><p>
+                                                  <ph id="remediate">Remediate</ph>
+                                                  </p>
+                                                  <p>
+                                                  <ph id="remediate_long">Puppet Remediate</ph>
+                                                  </p>
+                                                  <p>
+                                                  <ph id="puppet_tasks">Puppet Tasks</ph>
+                                                  </p>
+                                                  <p>
+                                                  <ph id="node_discover">Node Discover</ph>
+                                                  </p>
+                                                  <p>
+                                                  <ph id="arrowhead">Arrowhead</ph>
+                                                  </p>
+                                                  <p>
+                                                   <ph id="comply">Comply</ph>
+                                                  </p>
+                                                  <p>
+                                                  <ph id="comply_long">Puppet Comply</ph>
+                                                  </p>
+                                                  <p>
+                                                  <ph id="teams">Teams</ph>
+                                                  </p>
+                                                  <p>
+                                                  <ph id="teams_long">Puppet Teams</ph>
+                                                  </p>
+   <p>
+    <ph id="pam_long">Puppet Application Manager</ph>
+   </p>
+                                        </section>
+                                        <section translate="no"><title>Third party keywords</title><p>
+                                                  <ph id="nix">*nix</ph>
+                                                  </p><p>
+                                                  <ph id="activemq">ActiveMQ</ph>
+                                                  </p><p>
+                                                  <ph id="aix">AIX</ph>
+                                                  </p><p>
+                                                  <ph id="apache">Apache</ph>
+                                                  </p><p>
+                                                  <ph id="centos">CentOS</ph>
+                                                  </p><p>
+                                                  <ph id="debian">Debian</ph>
+                                                  </p><p>
+                                                  <ph id="el">Enterprise Linux</ph>
+                                                  </p><p>
+                                                  <ph id="fedora">Fedora</ph>
+                                                  </p><p>
+                                                  <ph id="github">GitHub</ph>
+                                                  </p><p>
+                                                  <ph id="github_enterprise">GitHub Enterprise</ph>
+                                                  </p><p>
+                                                  <ph id="gitlab">GitLab</ph>
+                                                  </p><p>
+                                                  <ph id="linux">Linux</ph>
+                                                  </p><p>
+                                                  <ph id="macosx">Mac OS X</ph>
+                                                  </p><p>
+                                                  <ph id="macos">macOS</ph>
+                                                  </p><p>
+                                                  <ph id="oracle_linux">Oracle Linux</ph>
+                                                  </p><p>
+                                                  <ph id="postgresql">PostgreSQL</ph>
+                                                  </p><p>
+                                                  <ph id="redhat">Red Hat</ph>
+                                                  </p><p>
+                                                  <ph id="rhel_long">Red Hat Enterprise Linux</ph>
+                                                  </p><p>
+                                                  <ph id="rhel_plus_init">Red Hat Enterprise Linux
+                                                  (RHEL)</ph>
+                                                  </p><p>
+                                                  <ph id="rhel">RHEL</ph>
+                                                  </p><p>
+                                                  <ph id="rsync">Rsync</ph>
+                                                  </p><p>
+                                                  <ph id="ruby">Ruby</ph>
+                                                  </p><p>
+                                                  <ph id="jruby">JRuby</ph>
+                                                  </p><p>
+                                                  <ph id="git">Git</ph>
+                                                  </p><p>
+                                                  <ph id="scientific_linux">Scientific Linux</ph>
+                                                  </p><p>
+                                                  <ph id="shiro">Shiro</ph>
+                                                  </p><p>
+                                                  <ph id="solaris">Solaris</ph>
+                                                  </p><p>
+                                                  <ph id="suseles">SUSE Linux Enterprise Server</ph>
+                                                  </p><p>
+                                                  <ph id="ubuntu">Ubuntu</ph>
+                                                  </p><p>
+                                                  <ph id="unix">Unix</ph>
+                                                  </p><p>
+                                                  <ph id="vmware">VMware</ph>
+                                                  </p><p>
+                                                  <ph id="vmware_fusion">VMWare Fusion</ph>
+                                                  </p><p>
+                                                  <ph id="vra">vRealize Automation</ph>
+                                                  </p><p>
+                                                  <ph id="google_chrome">Google Chrome</ph>
+                                                  </p><p>
+                                                  <ph id="chrome">Chrome</ph>
+                                                  </p><p>
+                                                  <ph id="mozilla_firefox">Mozilla Firefox</ph>
+                                                  </p><p>
+                                                  <ph id="firefox">Firefox</ph>
+                                                  </p><p>
+                                                  <ph id="microsoft_edge">Microsoft Edge</ph>
+                                                  </p><p>
+                                                  <ph id="edge">Edge</ph>
+                                                  </p><p>
+                                                  <ph id="ms_internet_explorer">Microsoft Internet
+                                                  Explorer</ph>
+                                                  </p><p>
+                                                  <ph id="internet_explorer">Internet Explorer</ph>
+                                                  </p><p>
+                                                  <ph id="apple_safari">Apple Safari</ph>
+                                                  </p><p>
+                                                  <ph id="safari">Safari</ph>
+                                                  </p><p>
+                                                  <ph id="microsoft">Microsoft</ph>
+                                                  </p><p>
+                                                  <ph id="windows">Windows</ph>
+                                                  </p><p>
+                                                  <ph id="ibm">IBM</ph>
+                                                  </p><p>
+                                                  <ph id="Amazon">Amazon</ph>
+                                                  </p><p>
+                                                  <ph id="aws_long">Amazon Web Services</ph>
+                                                  </p><p>
+                                                  <ph id="aws_long_plus_init">Amazon Web Services
+                                                  (AWS)</ph>
+                                                  </p><p>
+                                                  <ph id="aws">AWS</ph>
+                                                  </p><p>
+                                                  <ph id="powershell">PowerShell</ph>
+                                                  </p><p>
+                                                  <ph id="ami_long">Amazon Machine Image</ph>
+                                                  </p><p>
+                                                  <ph id="ami_plus_init">Amazon Machine Image
+                                                  (AMI)</ph>
+                                                  </p><p>
+                                                  <ph id="ami">AMI</ph>
+                                                  </p><p>
+                                                  <ph id="cloudformation">CloudFormation</ph>
+                                                  </p><p>
+                                                  <ph id="azure">Azure</ph>
+                                                  </p><p>
+                                                  <ph id="stack_azure">Azure Stack</ph>
+                                                  </p><p>
+                                                  <ph id="opnstack">OpenStack</ph>
+                                                  </p><p>
+                                                  <ph id="qualys">Qualys</ph>
+                                                  </p><p>
+                                                  <ph id="rapid7">Rapid7</ph>
+                                                  </p><p>
+                                                  <ph id="tenable">Tenable</ph>
+                                                  </p><p>
+                                                  <ph id="tenable_io">Tenable.io</ph>
+                                                  </p><p>
+                                                  <ph id="tenable_sc">Tenable.sc</ph>
+                                                  </p><p>
+                                                  <ph id="vmware_vsphere">VMware vSphere</ph>
+                                                  </p><p>
+                                                  <ph id="gcp">GCP</ph>
+                                                  </p><p>
+                                                  <ph id="gcp_long">Google Cloud Platform</ph>
+                                                  </p><p>
+                                                  <ph id="gcp_long_plus_init">Google Cloud Platform
+                                                  (GCP)</ph>
+                                                  </p><p>
+                                                  <ph id="docker">Docker</ph>
+                                                  </p><p>
+                                                  <ph id="docker_ee">Docker EE</ph>
+                                                  </p><p>
+                                                  <ph id="docker_ce">Docker CE</ph>
+                                                  </p><p>
+                                                  <ph id="docker_compose">Docker Compose</ph>
+                                                  </p><p>
+                                                  <ph id="docker_hub">Docker Hub</ph>
+                                                  </p><p>
+                                                  <ph id="kubernetes">Kubernetes</ph>
+                                                  </p>
+   <p>
+    <ph id="kots">KOTS</ph>
+   </p>
+   <p>
+    <ph id="ceph">Ceph</ph>
+   </p>
+   <p>
+    <ph id="rook">Rook</ph>
+   </p>
+   <p>
+    <ph id="project-contour">Project Contour</ph>
+   </p>
+   <p>
+    <ph id="ekco">ekco</ph>
+   </p>
+   <p>
+    <ph id="prometheus">Prometheus</ph>
+   </p>
+   <p>
+    <ph id="metrics-server">Metrics Server</ph>
+   </p>
+   <p>
+    <ph id="kurl">kURL</ph>
+   </p>
+   <p>
+    <ph id="weave">Weave</ph>
+   </p>
+   <p>
+    <ph id="velero">Velero</ph>
+   </p>
+   <p>
+    <ph id="grafana">Grafana</ph>
+   </p>
+   <p>
+    <ph id="restic">Restic</ph>
+   </p>
+   <p>
+    <ph id="minio">MinIO</ph>
+   </p></section>
+                    </conbody>
+</concept>

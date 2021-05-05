@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="pam-conref-images">
+    <title>Image warehouse</title>
+    <shortdesc/>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-13"/>
+        </critdates>
+    </prolog>
+    <conbody>
+        <p/>
+        <table colsep="1" frame="all" rowsep="1">
+            <tgroup align="left" cols="2">
+                <colspec colname="c1" colnum="1"/>
+                <colspec colname="c2" colnum="2"/>
+                <thead>
+                    <row>
+                        <entry>image</entry>
+                        <entry>description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            <image href="Node-Architecture.png" id="node-arch-image"
+                                placement="break" scale="80" scalefit="yes">
+                                <alt>Node Architecture</alt>
+                            </image>
+                        </entry>
+                        <entry>node architecture image</entry>
+                    </row>
+                    <row>
+                        <entry><image href="replicated-cycle.png" id="pam-cycle-icon"
+                                placement="inline" scale="25">
+                                <alt>cycle icon</alt>
+                            </image></entry>
+                        <entry/>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry/>
+                    </row>
+                    <row>
+                        <entry> </entry>
+                        <entry/>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry/>
+                    </row>
+                    <row>
+                        <entry> </entry>
+                        <entry/>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry/>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry/>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry/>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry/>
+                    </row>
+                    <row>
+                        <entry/>
+                        <entry/>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </conbody>
+</concept>

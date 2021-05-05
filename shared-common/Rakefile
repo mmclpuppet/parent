@@ -1,0 +1,33 @@
+# frozen_string_literal: true
+
+require_relative 'tasks/list_products_code'
+require_relative 'tasks/combine_code'
+require_relative 'tasks/merge_code'
+require_relative 'tasks/helper_code'
+
+task default: 'list'
+
+desc 'Create a repos directory if one is not found'
+task :make_repos_dir do
+    make_directory
+end
+
+desc 'Clone and checkout puppet dita directory'
+task :clone_and_checkout => :make_repos_dir do | repo |
+    pupdita = 'git@github.com:puppetlabs/puppet-docs-dita-ot.git'
+    checkout(pupdita)
+end
+
+desc 'Combines YAML and lists products with shared_docs: True'
+task :list => [:clone_and_checkout] do
+    list_products branch_data
+end 
+
+desc 'Merges subtrees into repos'
+task :merge => [:list] do
+    merge_trees branch_data
+end
+
+require 'rake/clean'
+CLOBBER.include('puppet-docs-dita-ot')
+CLOBBER.include('repos/*')

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="pam-terminology">
+    <title><ph conkeyref="ProductNames/pam_long"/> terminology</title>
+    <shortdesc><ph conkeyref="ProductNames/pam_long"/> uses some specialist terms that require
+        further explanation.</shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-13"/>
+        </critdates>
+    </prolog>
+    <refbody>
+        <section>
+            <title>Control plane</title>
+            <p/>
+        </section>
+        <section>
+            <title><ph conkeyref="ProductNames/kots"/></title>
+            <p/>
+        </section>
+        <section id="kotadm">
+            <title>KOTSADM</title>
+            <p/>
+        </section>
+        <section id="kubectl">
+            <title>kubectl</title>
+            <p/>
+        </section>
+        <section>
+            <title>Master</title>
+            <p>See Primary node</p>
+        </section>
+        <section>
+            <title>Node</title>
+            <p/>
+        </section>
+        <section>
+            <title>node draining</title>
+            <p/>
+        </section>
+        <section id="primary-node">
+            <title>Primary node</title>
+            <p>A primary node runs core <ph conkeyref="ProductNames/kubernetes"/> components
+                (referred to as the <ph conkeyref="ProductNames/kubernetes"/> control plane) as well
+                as application workloads. At least 3 primaries are required to support high
+                availability for <ph conkeyref="ProductNames/pam_long"/>. These are also sometimes
+                referred to as <i>masters</i>.</p>
+        </section>
+        <section id="secondary-node">
+            <title>Secondary node</title>
+            <p>A secondary node runs application workloads. These are also sometimes referred to as
+                    <i>workers</i>.</p>
+        </section>
+        <section>
+            <title>Server</title>
+            <p/>
+        </section>
+    </refbody>
+</reference>

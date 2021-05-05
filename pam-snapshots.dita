@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="pam-snapshots">
+    <title>Backing up <ph conkeyref="ProductNames/pam_long"/> using snapshots</title>
+    <shortdesc>Snapshots are point-in-time backups of your <ph conkeyref="ProductNames/pam_long"/>
+        deployment, which can be used to roll back to a previous state or restore your installation
+        into a new cluster for disaster recovery. </shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-13"/>
+        </critdates>
+    </prolog>
+    <conbody>
+        <p/>
+    </conbody>
+</concept>

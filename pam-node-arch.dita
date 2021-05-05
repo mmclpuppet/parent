@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="pam-sys-reqs">
+    <title>Architecture overview</title>
+    <shortdesc><ph conkeyref="ProductNames/pam_long"/> runs on <ph
+            conkeyref="ProductNames/kubernetes"/>. <ph conkeyref="ProductNames/puppet"/> provides
+        several supported configurations for different use cases.</shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-13"/>
+        </critdates>
+    </prolog>
+    <refbody>
+        <section>
+            <p>Throughout these docs, we use a few terms to describe different roles nodes can
+                take:</p>
+            <ul>
+                <li><b>Primary</b> - A primary node runs core <ph
+                        conkeyref="ProductNames/kubernetes"/> components (referred to as the <ph
+                        conkeyref="ProductNames/kubernetes"/> control plane) as well as application
+                    workloads. At least 3 primaries are required to support high availability for
+                        <ph conkeyref="ProductNames/pam_long"/>. These are also sometimes referred
+                    to as <i>masters</i>.</li>
+                <li><b>Secondary</b> - A secondary node runs application workloads. These are also
+                    sometimes referred to as <i>workers</i>.</li>
+            </ul>
+            <p>The <ph conkeyref="ProductNames/pam_long"/> is built on the <ph
+                    conkeyref="ProductNames/kots"/> (<ph conkeyref="ProductNames/kubernetes"/>
+                off-the-Shelf) project, and we occasionally use its CLI tools (<codeph
+                    translate="no">kubectl</codeph>, <codeph translate="no">kots</codeph>) to manage
+                the installation.</p>
+        </section>
+        <section id="standalone-arch">
+            <title>Standalone architecture</title>
+            <p>Standalone is optimized for limited resources. It omits optional features like <ph
+                    conkeyref="ProductNames/prometheus"/> and <ph conkeyref="ProductNames/grafana"
+                />, and stores data directly on disk. While additional compute capacity can be added
+                through secondary nodes, this does not provide increased resilience as data is only
+                stored on the node where a component service runs.</p>
+        </section>
+        <section id="ha-arch">
+            <title>HA architecture</title>
+            <p>A HA architecture provides high availability for scheduling application services
+                during failure and uses <ph conkeyref="ProductNames/ceph"/> for distributed storage
+                in case of node failure. Individual applications may still experience some loss of
+                availability (up to 10 minutes) if individual services do not have replicas and need
+                to be rescheduled. A HA implementation requires a cluster of 3 primary nodes.
+                Additional compute capacity can be added through secondary nodes.</p>
+        </section>
+        <section id="sample-node-arch"><title><ph conkeyref="ProductNames/pam_long"/>
+                architectures</title><p>The following outline some of the core components involved
+                in standalone and HA architectures, and how they communicate.</p><image
+                conref="conref-images.dita#pam-conref-images/node-arch-image">
+                <alt/>
+            </image></section>
+    </refbody>
+</reference>

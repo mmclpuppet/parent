@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="pam-rollback-snapshot">
+    <title>Roll back changes using a snapshot</title>
+    <shortdesc>When necessary, you can use a snapshot to roll back to a previous version of your <ph
+            conkeyref="ProductNames/pam_long"/> set-up without changing the underlying cluster
+        infrastructure. </shortdesc>
+    <prolog>
+        <author type="creator">Mindy Moreland</author>
+        <critdates>
+            <created date="2021/04/14"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <context>
+            <p>To roll back changes:</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>In the upper navigation bar of the <ph conkeyref="ProductNames/pam_long"/> UI,
+                    click <uicontrol>Snapshots</uicontrol> > <uicontrol>Full Snapshots
+                        (Instance)</uicontrol>.</cmd>
+            </step>
+            <step>
+                <cmd>Select the snapshot you wish to roll back to from the list of available
+                    snapshots and click <uicontrol>Restore from this backup</uicontrol>
+                    <image conref="conref-images.dita#pam-conref-images/pam-cycle-icon"
+                        placement="inline" width="20">
+                        <alt>Cycle icon</alt>
+                    </image>.</cmd>
+            </step>
+            <step>
+                <cmd>Follow the instructions to complete either a partial restore or a full
+                    restore.</cmd>
+                <info>A full restore is useful if you need to stay on an earlier version of an
+                    application and want to disable automatic version updates. Otherwise, a partial
+                    restore is the quicker option. </info>
+            </step>
+        </steps>
+    </taskbody>
+</task>

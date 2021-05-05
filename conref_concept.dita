@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="conref-concept">
+    <title>Conref concept warehouse</title>
+    <shortdesc/>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-19"/>
+        </critdates>
+    </prolog>
+    <conbody>
+        <p/>
+        <section id="standalone-install-reqs">
+            <title>standalone install reqs</title>
+            <p>Used by pam-standalone-online-install.dita, pam-standalone-offline-install.dita</p>
+            <p id="pam-standalone-reqs">
+                <table>
+                    <tgroup align="left" cols="4">
+                        <colspec colname="c2" colnum="1"/>
+                        <colspec colname="c3" colnum="2"/>
+                        <colspec colname="c4" colnum="3"/>
+                        <colspec colname="newCol4" colnum="4"/>
+                        <thead>
+                            <row>
+                                <entry>Memory</entry>
+                                <entry>Storage</entry>
+                                <entry>CPUs</entry>
+                                <entry>Open ports</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>8GB</entry>
+                                <entry>At least 150 GB for <codeph translate="no">/var/lib</codeph>
+                                    and <codeph translate="no">var/openebs</codeph>. This is
+                                    primarily divided among:<ul>
+                                        <li>2 GB for <codeph translate="no"
+                                            >/var/lib/etcd</codeph></li>
+                                        <li>32 GB for <codeph translate="no"
+                                                >/var/lib/kubelet</codeph></li>
+                                        <li>40 GB for <codeph translate="no"
+                                                >/var/lib/containerd</codeph></li>
+                                        <li> 75 GB for <codeph translate="no"
+                                            >/var/openebs</codeph></li>
+                                    </ul><note>Note that <codeph translate="no"
+                                            >/var/openebs</codeph> and<codeph translate="no">
+                                            /var/lib/kubelet</codeph> share hardlinks, so they must
+                                        be located on the same filesystem. </note>
+                                </entry>
+                                <entry>4 (or equivalent)</entry>
+                                <entry>
+                                    <p>TCP: 443, 2379,2380, 6443, 6783, 8800, and 10250</p>
+                                    <p>UDP: 6783, 6784</p>
+                                </entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </p>
+        </section>
+        <section id="ha-install-reqs">
+            <title>HA install reqs</title>
+            <p>Used by pam-ha-online-install.dita, pam-ha-offline-install.dita</p>
+            <p id="pam-ha-reqs">
+                <table>
+                    <tgroup align="left" cols="4">
+                        <colspec colname="c2" colnum="1"/>
+                        <colspec colname="c3" colnum="2"/>
+                        <colspec colname="c4" colnum="3"/>
+                        <colspec colname="newCol4" colnum="4"/>
+                        <thead>
+                            <row>
+                                <entry>Memory</entry>
+                                <entry>Storage</entry>
+                                <entry>CPUs</entry>
+                                <entry>Open ports</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>10 GB</entry>
+                                <entry>
+                                    <ul>
+                                        <li dir="ltr">
+                                            <p dir="ltr">At least 100 GB on an unformatted storage
+                                                device (such as a partition or raw device)</p>
+                                        </li>
+                                        <li dir="ltr">
+                                            <p dir="ltr">At least 100 GB for `/var/lib`. This is
+                                                primarily divided among:</p>
+                                            <ul>
+                                                <li dir="ltr">
+                                                  <p dir="ltr">2 GB for /var/lib/etcd</p>
+                                                </li>
+                                                <li dir="ltr">
+                                                  <p dir="ltr">4 GB for /var/lib/rook (plus
+                                                  buffer)</p>
+                                                </li>
+                                                <li dir="ltr">
+                                                  <p dir="ltr">32 GB for /var/lib/kubelet</p>
+                                                </li>
+                                                <li dir="ltr">
+                                                  <p dir="ltr">40 GB for /var/lib/containerd</p>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li dir="ltr">
+                                            <p dir="ltr">Note that the <ph
+                                                  conkeyref="ProductNames/ceph"/> storage backend
+                                                prefers the filesystem inhabited by <codeph
+                                                  translate="no">/var/lib/rook</codeph> to remain
+                                                below 70% utilization.</p>
+                                        </li>
+                                        <li dir="ltr">
+                                            <p dir="ltr">SSDs (or similarly low-latency storage) are
+                                                recommended for<codeph translate="no">
+                                                  /var/lib/etcd</codeph> and<codeph translate="no">
+                                                  /var/lib/rook</codeph>.</p>
+                                        </li>
+                                    </ul>
+                                </entry>
+                                <entry>6 (or equivalent)</entry>
+                                <entry>
+                                    <p>TCP: 443, 2379,2380, 6443, 6783, 8000, 8800, and 10250</p>
+                                    <p>UDP: 6783, 6784</p>
+                                </entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </p>
+        </section>
+    </conbody>
+</concept>

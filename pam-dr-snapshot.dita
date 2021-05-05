@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="pam-dr-snapshot">
+    <title>Disaster recovery using a snapshot</title>
+    <shortdesc>Full disaster recovery is possible using a snapshot. You must create a new cluster to
+        recover to, then follow the process outlined below to recover your instance from a snapshot. </shortdesc>
+    <prolog>
+        <author type="creator">Mindy Moreland</author>
+        <critdates>
+            <created date="2021/04/15"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <context>
+            <note>The option to use a different supported architecture (Legacy, Standalone, HA) than
+                the one you used to create the snapshot when setting up a new system as part of
+                Disaster Recovery will be added in a future release.</note>
+        </context>
+        <steps>
+            <step>
+                <cmd>Set up a new cluster to house the recovered instance following the system
+                    requirements for your applications.</cmd>
+            </step>
+            <step>
+                <cmd>To recover using a snapshot saved to a <b>host path</b>, ensure user/group 1001
+                    has full access on all nodes by running:</cmd>
+                <info>
+                    <codeblock translate="no">chown -R 1001:1001 /&lt;PATH/TO/HOSTPATH></codeblock>
+                </info>
+            </step>
+            <step>
+                <cmd>Configure the new cluster to connect to your snapshot storage location. Run the
+                    following to see the arguments needed to complete this task:</cmd>
+                <info>
+                    <p>
+                        <codeblock translate="no">kubectl kots -n default velero configure-{hostpath,nfs,aws-s3,other-s3,gcp} --help</codeblock>
+                    </p>
+                </info>
+            </step>
+            <step>
+                <cmd>Run <codeph translate="no">kubectl kots get backup</codeph> and wait for the
+                    list of snapshots to become available. This might take several minutes. </cmd>
+            </step>
+            <step>
+                <cmd>Start the restoration process by running <codeph translate="no">kubectl kots
+                        restore --from-backup &lt;BACKUP NAME></codeph>.</cmd>
+                <info>The restoration process takes several minutes to complete. When the <ph
+                        conkeyref="ProductNames/pam_long"/> UI is available, use it to monitor the
+                    status of the application.<note>When restoring, wait for all restores to
+                        complete before making any changes. You can wait for completion
+                        via:<codeblock translate="no">kubectl wait --for=condition=Ready pod -l velero.io/backup-name --timeout 5m</codeblock></note></info>
+            </step>
+            <step>
+                <cmd>If the new cluster's hostname is different from the old one, in the <ph
+                        conkeyref="ProductNames/pam_long"/> UI, update the
+                        <uicontrol>Hostname</uicontrol> on the <uicontrol>Config</uicontrol> tab,
+                    click <uicontrol>Save Config</uicontrol>, and then redeploy the application.
+                </cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task>

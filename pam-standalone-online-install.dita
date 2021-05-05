@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="pam-standalone-online-install">
+    <title><ph conkeyref="ProductNames/pam_long"/> standalone online install </title>
+    <shortdesc>The <ph conkeyref="ProductNames/pam_long"/> installation process sets up the
+        application manager (with a simple <ph conkeyref="ProductNames/kubernetes"/>installation for
+        container orchestration) for you and installs the application on the single-node cluster. </shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-13"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <prereq>
+            <ol>
+                <li conref="conref-task.dita#sa-install/prereq-SAinstall1"
+                    conrefend="conref-task.dita#sa-install/prereq-SAinstall2"/>
+            </ol>
+        </prereq>
+        <context>This installation process results in a basic <ph conkeyref="ProductNames/pam_long"
+            /> instance. Installation takes several (mostly hands-off) minutes to complete. </context>
+        <steps>
+            <step>
+                <cmd>From the command line of your node, run the installation script:</cmd>
+                <info>
+                    <codeblock translate="no">curl -sSL https://k8s.kurl.sh/puppet-application-manager-standalone | sudo bash</codeblock>
+                </info>
+                <substeps>
+                    <substep>
+                        <cmd>When the installation script prints the <ph
+                                conkeyref="ProductNames/pam_long"/> address and password, make a
+                            careful note of these credentials:</cmd>
+                        <info>
+                            <codeblock translate="no">---
+Kotsadm: http://&lt;PUPPET APPLICATION MANAGER ADDRESS>:8800
+Login with password (will not be shown again): &lt;PASSWORD>
+---</codeblock>
+                        </info>
+                        <info>
+                            <note>If you lose this password or wish to change it, see <xref
+                                    keyref="pam-console-pwd-reset">Resetting the platform admin
+                                    console password</xref> for instructions. </note>
+                        </info>
+                    </substep>
+                    <substep>
+                        <cmd>When the installation script is complete, run <codeph translate="no"
+                                >bash -l</codeph> to reload the shell. </cmd>
+                    </substep>
+                </substeps>
+                <info>
+                    <note type="tip">If the installation script fails, run the following and upload
+                        the results to the <ph conkeyref="ProductNames/puppet"/> Support
+                            team:<codeblock translate="no">kubectl support-bundle https://kots.io</codeblock><p>If
+                            you're installing as the root user, run the command directly:
+                            <codeblock translate="no">/usr/local/bin/kubectl-support_bundle https://kots.io</codeblock></p></note>
+                </info>
+            </step>
+            <step conref="conref-task.dita#pam-conref-task/step-complete-install">
+                <cmd/>
+            </step>
+        </steps>
+        <postreq>
+            <draft-comment author="michael.mcloughlin" translate="no">Need to decide where
+                individual app install instructions live.</draft-comment>
+            <p>Follow the instructions for installing your <ph conkeyref="ProductNames/puppet"/>
+                applications on <ph conkeyref="ProductNames/pam_long"/>.</p>
+            <p conref="conref-task.dita#pam-conref-task/install-cd4pe-online"/>
+            <p conref="conref-task.dita#pam-conref-task/install-comply-online"/>
+        </postreq>
+    </taskbody>
+</task>

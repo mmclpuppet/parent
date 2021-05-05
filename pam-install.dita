@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="pam-install">
+    <title>Install <ph conkeyref="ProductNames/pam_long"/></title>
+    <shortdesc>You can install <ph conkeyref="ProductNames/pam_long"/> on a single node or in a HA
+        configuration. Both online and offline install packages are available.</shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021/04/12"/>
+        </critdates>
+    </prolog>
+    <conbody>
+        <p>Refer to the <xref keyref="pam-node-arch"/> for guidance on choosing which is most
+            appropriate for your needs.</p>
+    </conbody>
+</concept>

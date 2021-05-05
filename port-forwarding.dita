@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="pam-port-forwarding">
+    <title>Port forwarding</title>
+    <shortdesc/>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-15"/>
+        </critdates>
+    </prolog>
+    <refbody>
+        <section id="cd4pe-port-forward">
+            <title>CD4PE ports</title>
+            <table frame="all">
+                <tgroup align="left" cols="5">
+                    <colspec colname="c1" colnum="1" colwidth="1*"/>
+                    <colspec colname="c2" colnum="2" colwidth="1*"/>
+                    <colspec colname="c3" colnum="3" colwidth="1*"/>
+                    <colspec colname="c4" colnum="4" colwidth="1*"/>
+                    <colspec colname="c5" colnum="5" colwidth="1*"/>
+                    <thead>
+                        <row>
+                            <entry>Port</entry>
+                            <entry>Protocol</entry>
+                            <entry>Purpose</entry>
+                            <entry>Source</entry>
+                            <entry>Destination</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry nameend="c5" namest="c1"><i><ph conkeyref="ProductNames/cd"/>
+                                    ports</i></entry>
+                        </row>
+                        <row>
+                            <entry>443</entry>
+                            <entry>TCP</entry>
+                            <entry>Web UI</entry>
+                            <entry>Browser</entry>
+                            <entry><ph conkeyref="ProductNames/cd"/></entry>
+                        </row>
+                        <row>
+                            <entry>8000</entry>
+                            <entry>TCP</entry>
+                            <entry>Webhook service</entry>
+                            <entry>Source control </entry>
+                            <entry><ph conkeyref="ProductNames/cd"/></entry>
+                        </row>
+                        <row>
+                            <entry nameend="c5" namest="c1"><i>Platform ports</i></entry>
+                        </row>
+                        <row>
+                            <entry>6443</entry>
+                            <entry>TCP</entry>
+                            <entry><ph conkeyref="ProductNames/kubernetes"/> API</entry>
+                            <entry>Admin workstation</entry>
+                            <entry><ph conkeyref="ProductNames/kubernetes"/> host</entry>
+                        </row>
+                        <row>
+                            <entry>8800</entry>
+                            <entry>TCP</entry>
+                            <entry>Platform admin console</entry>
+                            <entry>Admin browser</entry>
+                            <entry><ph conkeyref="ProductNames/kubernetes"/> host</entry>
+                        </row>
+                        <row>
+                            <entry>9001 (offline installations only)</entry>
+                            <entry>TCP</entry>
+                            <entry>Local registry for offline installations</entry>
+                            <entry>Job hardware</entry>
+                            <entry><ph conkeyref="ProductNames/kubernetes"/> host</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        <section id="comply-port-forward">
+            <title>Comply ports</title>
+            <p/>
+        </section>
+    </refbody>
+</reference>

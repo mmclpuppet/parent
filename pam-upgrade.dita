@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="pam-upgrade">
+    <title>Upgrade <ph conkeyref="ProductNames/pam_long">online </ph> online</title>
+    <shortdesc>Upgrade <ph conkeyref="ProductNames/pam_long"/> to take advantage of new features and
+        bug fixes, and to upgrade your cluster to the latest version of <ph
+            conkeyref="ProductNames/kubernetes"/> when one is available. </shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-04-19"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <context>
+            <p/>
+        </context>
+        <steps>
+            <step>
+                <cmd>On your first primary node, rerun the installation script, passing in any
+                    arguments you included when installing for the first time:</cmd>
+                <info>For standalone deployments,
+                        use:<codeblock translate="no">curl -sSL https://pup.pt/install-puppet-application-manager-standalone | sudo bash</codeblock><p>For
+                        HA deployments,
+                    use:</p><codeblock translate="no">curl -sSL https://pup.pt/install-puppet-application-manager | sudo bash</codeblock></info>
+            </step>
+            <step>
+                <cmd>If a new version of <ph conkeyref="ProductNames/kubernetes"/> is available, the
+                    installers notes upgrade scripts to run on other nodes in an HA cluster.</cmd>
+                <info>The installer also pauses before draining nodes as part of the <ph
+                        conkeyref="ProductNames/kubernetes"/> upgrade. The node draining process can
+                    take several minutes to complete, during which time application workloads are
+                    stopped or migrated to other systems. This migration may cause several minutes
+                    of downtime while databases are rescheduled.</info>
+            </step>
+        </steps>
+    </taskbody>
+</task>

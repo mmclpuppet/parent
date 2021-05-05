@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="pam-fail-recovery-time">
+    <title>Reduce recovery time when a node fails</title>
+    <shortdesc>If a node running a non-replicated service like <ph
+            conkeyref="ProductNames/postgresql">PostgreSQL</ph> fails, expect some service downtime. </shortdesc>
+    <prolog>
+        <author type="creator">michael.mcloughlin@puppet.com</author>
+        <critdates>
+            <created date="2021-05-05"/>
+        </critdates>
+    </prolog>
+    <conbody>
+        <p>How much downtime depends on the following factors:</p>
+        <ul>
+            <li>Timeout for communication between <ph conkeyref="ProductNames/kubernetes"/> services
+                ( at least1 minute to mark the node as unreachable).</li>
+            <li>Timeout for the <ph conkeyref="ProductNames/ekco">ekco</ph> service to determine
+                that pods need to be rescheduled. The default is 5 minutes after node is marked
+                unreachable.</li>
+            <li>Time to restart services ( at least 2 minutes, possibly up to 5 minutes, if there
+                are complex dependencies).</li>
+        </ul>
+        <p>The <ph conkeyref="ProductNames/ekco">ekco</ph> service can be configured to reschedule
+            pods more quickly by configuring the installation with a
+            <codeph>patch.yaml</codeph>similar to the following:</p>
+        <codeblock translate="no">apiVersion: cluster.kurl.sh/v1beta1
+kind: Installer
+metadata:
+  name: patch
+spec:
+  ekco:
+    nodeUnreachableToleration: 1m
+</codeblock>
+        <p>Apply the patch during an install or upgrade by including <codeph translate="no"
+                >installer-spec-file=patch.yaml</codeph> as an install option. </p>
+        <note type="important">This patch needs to be included during all future upgrades to avoid
+            resetting the option.</note>
+    </conbody>
+</concept>

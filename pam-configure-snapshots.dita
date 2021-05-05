@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="pam-configure-snapshots">
+    <title>Configure snapshots</title>
+    <shortdesc> </shortdesc>
+    <prolog>
+        <author type="creator">Mindy Moreland</author>
+        <critdates>
+            <created date="2020/09/22"/>
+        </critdates>
+    </prolog>
+    <taskbody>
+        <context>
+            <note type="important">The snapshots feature was accidentally disabled on some
+                application licenses issued prior to March 2021. If you do not see a
+                    <uicontrol>Snapshots</uicontrol> option in your <ph
+                    conkeyref="ProductNames/pam_long"/> UI, and you would like to use this feature,
+                please contact our Support team using the Zendesk account provided to you. </note>
+            <note type="note">A beta version of the snapshots feature, which only supported rollback
+                snapshots, was available prior to the 15 April <ph conkeyref="ProductNames/pam_long"
+                /> release. Some features or storage locations mentioned on this page are not
+                available on older versions of the <ph conkeyref="ProductNames/pam_long"/>. </note>
+            <p>Before using snapshots, select a storage location, set a snapshot retention period,
+                and indicate whether snapshots are created manually or on a set schedule.</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>In the upper navigation bar of the <ph conkeyref="ProductNames/pam_long"/> UI,
+                    click <uicontrol>Snapshots</uicontrol> > <uicontrol>Settings &amp;
+                        Schedule</uicontrol>.</cmd>
+            </step>
+            <step>
+                <cmd>The snapshots feature uses <xref keyref="ext-velero"/>, an open source backup
+                    and restore tool. Click <uicontrol>Check for Velero</uicontrol> to determine
+                    whether <ph conkeyref="ProductNames/velero"/> is present on your cluster, and to
+                    install it if needed.</cmd>
+            </step>
+            <step>
+                <cmd>Select a destination for your snapshot storage and provide the required
+                    configuration information. Supported destinations are listed below. We recommend
+                    using an external service or NFS, depending on what is available to you:</cmd>
+                <info>
+                    <ul>
+                        <li>Internal storage (default)</li>
+                        <li><ph conkeyref="ProductNames/Amazon"/> S3</li>
+                        <li><ph conkeyref="ProductNames/azure"/> Blob Storage</li>
+                        <li>Google Cloud Storage</li>
+                        <li>Other S3-compatible storage</li>
+                        <li>Network file system (NFS)</li>
+                        <li>Host path</li>
+                    </ul>
+                </info>
+                <info>For <b><ph conkeyref="ProductNames/Amazon"/> S3 storage</b>, provide the
+                    following information:<table frame="all">
+                        <tgroup cols="2">
+                            <colspec colname="c1" colnum="1" colwidth="1*"/>
+                            <colspec colname="c2" colnum="2" colwidth="2.08*"/>
+                            <thead>
+                                <row>
+                                    <entry>Field</entry>
+                                    <entry>Description</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>Bucket</entry>
+                                    <entry>The name of the AWS bucket where snapshots are
+                                        stored.</entry>
+                                </row>
+                                <row>
+                                    <entry>Region</entry>
+                                    <entry>The AWS region the bucket is available in. </entry>
+                                </row>
+                                <row>
+                                    <entry>Path </entry>
+                                    <entry><b>Optional.</b> The path within the bucket where all
+                                        snapshots are stored. </entry>
+                                </row>
+                                <row>
+                                    <entry>Use IAM instance role?</entry>
+                                    <entry>If selected, an IAM instance role is used instead of an
+                                        access key ID and secret.</entry>
+                                </row>
+                                <row>
+                                    <entry>Access key ID</entry>
+                                    <entry><b>Required only if not using an IAM instance role.</b>
+                                        The AWS IAM access key ID that can read from and write to
+                                        the bucket.</entry>
+                                </row>
+                                <row>
+                                    <entry>Access key secret</entry>
+                                    <entry><b>Required only if not using an IAM instance role.</b>
+                                        The AWS IAM secret access key that is associated with the
+                                        access key ID.</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table><p>For <b><ph conkeyref="ProductNames/azure"/> Blob Storage</b>, provide
+                        the following information: <table frame="all">
+                            <tgroup cols="2">
+                                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                                <colspec colname="c2" colnum="2" colwidth="2.08*"/>
+                                <thead>
+                                    <row>
+                                        <entry>Field </entry>
+                                        <entry>Description</entry>
+                                    </row>
+                                </thead>
+                                <tbody>
+                                    <row>
+                                        <entry nameend="c2" namest="c1">
+                                            <note>Only connections via service principals are
+                                                currently supported. </note>
+                                        </entry>
+                                    </row>
+                                    <row>
+                                        <entry>Bucket</entry>
+                                        <entry>The name of the <ph conkeyref="ProductNames/azure"/>
+                                            Blob Storage container where snapshots are
+                                            stored.</entry>
+                                    </row>
+                                    <row>
+                                        <entry>Path</entry>
+                                        <entry><b>Optional.</b> The path within the container where
+                                            all snapshots are stored. </entry>
+                                    </row>
+                                    <row>
+                                        <entry>Subscription ID</entry>
+                                        <entry><b>Required only for access via service principal or
+                                                AAD Pod Identity.</b> The subscription ID associated
+                                            with the target container. </entry>
+                                    </row>
+                                    <row>
+                                        <entry>Tenant ID</entry>
+                                        <entry><b>Required only for access via service principal
+                                                .</b> The tenant ID associated with the <ph
+                                                conkeyref="ProductNames/azure"/> account of the
+                                            target container.</entry>
+                                    </row>
+                                    <row>
+                                        <entry>Client ID</entry>
+                                        <entry><b>Required only for access via service principal
+                                                .</b> The client ID of a Service Principle with
+                                            access to the target container.</entry>
+                                    </row>
+                                    <row>
+                                        <entry>Client secret</entry>
+                                        <entry><b>Required only for access via service principal
+                                                .</b> The Client Secret of a Service Principle with
+                                            access to the target container.</entry>
+                                    </row>
+                                    <row>
+                                        <entry>Cloud name</entry>
+                                        <entry>The <ph conkeyref="ProductNames/azure"/> cloud for
+                                            the target storage (options: AzurePublicCloud,
+                                            AzureUSGovernmentCloud, AzureChinaCloud,
+                                            AzureGermanCloud)</entry>
+                                    </row>
+                                    <row>
+                                        <entry>Resource group</entry>
+                                        <entry>The resource group name of the target
+                                            container.</entry>
+                                    </row>
+                                    <row>
+                                        <entry>Storage account</entry>
+                                        <entry>The storage account name of the target
+                                            container</entry>
+                                    </row>
+                                </tbody>
+                            </tgroup>
+                        </table></p><p>For <b>Google Cloud Storage</b>, provide the following
+                            information:<table frame="all">
+                            <tgroup cols="2">
+                                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                                <colspec colname="c2" colnum="2" colwidth="2.03*"/>
+                                <thead>
+                                    <row>
+                                        <entry>Field </entry>
+                                        <entry>Description</entry>
+                                    </row>
+                                </thead>
+                                <tbody>
+                                    <row>
+                                        <entry>Bucket</entry>
+                                        <entry>The name of the GCS bucket where snapshots are
+                                            stored.</entry>
+                                    </row>
+                                    <row>
+                                        <entry>Path</entry>
+                                        <entry><b>Optional.</b> The path within the bucket where all
+                                            snapshots are stored. </entry>
+                                    </row>
+                                    <row>
+                                        <entry>Service account</entry>
+                                        <entry>The GCP IAM Service Account JSON file that has
+                                            permissions to read from and write to the storage
+                                            location.</entry>
+                                    </row>
+                                </tbody>
+                            </tgroup>
+                        </table></p><p>For <b>other S3-compatible storage</b>, provide the following
+                        information:</p><table frame="all">
+                        <tgroup cols="2">
+                            <colspec colname="c1" colnum="1" colwidth="1*"/>
+                            <colspec colname="c2" colnum="2" colwidth="1.99*"/>
+                            <thead>
+                                <row>
+                                    <entry>Field</entry>
+                                    <entry>Description</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>Bucket</entry>
+                                    <entry>The name of the bucket where snapshots are
+                                        stored.</entry>
+                                </row>
+                                <row>
+                                    <entry>Path </entry>
+                                    <entry><b>Optional.</b> The path within the bucket where all
+                                        snapshots are stored. </entry>
+                                </row>
+                                <row>
+                                    <entry>Access key ID</entry>
+                                    <entry>The access key ID that can read from and write to the
+                                        bucket.</entry>
+                                </row>
+                                <row>
+                                    <entry>Access key secret</entry>
+                                    <entry>The secret access key that is associated with the access
+                                        key ID.</entry>
+                                </row>
+                                <row>
+                                    <entry>Endpoint</entry>
+                                    <entry>The endpoint to use to connect to the bucket.</entry>
+                                </row>
+                                <row>
+                                    <entry>Region</entry>
+                                    <entry>The region the bucket is available in. </entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table><p>For a <b>network file system (NFS)</b>, take note of these important
+                        steps before you begin configuration: <ul>
+                            <li>Make sure that you have the NFS server set up and configured to
+                                allow access from all the nodes in the cluster.</li>
+                            <li>Make sure all the nodes in the cluster have the necessary NFS client
+                                packages installed to be able to communicate with the NFS
+                                server.</li>
+                            <li>Make sure that any firewalls are properly configured to allow
+                                traffic between the NFS server and nodes in the cluster.</li>
+                        </ul></p><p>Provide the following information: <table frame="all">
+                            <tgroup cols="2">
+                                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                                <colspec colname="c2" colnum="2" colwidth="1*"/>
+                                <thead>
+                                    <row>
+                                        <entry>Field </entry>
+                                        <entry>Description</entry>
+                                    </row>
+                                </thead>
+                                <tbody>
+                                    <row>
+                                        <entry>Server</entry>
+                                        <entry>The hostname or IP address of the NFS server.</entry>
+                                    </row>
+                                    <row>
+                                        <entry>Path</entry>
+                                        <entry>The path that is exported by the NFS server.</entry>
+                                    </row>
+                                </tbody>
+                            </tgroup>
+                        </table></p><p>For a <b>host path</b>, note that the configured path must be
+                        fully accessible by user/group 1001 on your cluster nodes. Host path works
+                        best when backed by a shared network file system.</p></info>
+            </step>
+            <step>
+                <cmd>Click <uicontrol>Update storage settings</uicontrol> to save your storage
+                    destination information.</cmd>
+                <info>Depending on your chosen storage provider, saving and configuring your storage
+                    provider might take several minutes. </info>
+            </step>
+            <step importance="optional">
+                <cmd>To automatically create new snapshots on a schedule, select <uicontrol>Enable
+                        automatic scheduled snapshots</uicontrol> on the <uicontrol>Full snapshots
+                        (instance)</uicontrol> tab. (If desired, you can also set up a schedule for
+                    capturing partial (application-only) snapshots.)</cmd>
+                <info>You can schedule a new snapshot creation for every hour, day, or week, or you
+                    can create a custom schedule by entering a cron expression. </info>
+            </step>
+            <step>
+                <cmd>Finally, set the retention schedule for your snapshots by selecting the time
+                    period after which old snapshots are automatically deleted. The default
+                    retention period is one month.</cmd>
+                <info>
+                    <note>A snapshot's retention period cannot be changed once the snapshot is
+                        created. If you update the retention schedule, the new retention period
+                        applies only to snapshots created after the update is made. </note>
+                </info>
+            </step>
+            <step>
+                <cmd>Click <uicontrol>Update schedule</uicontrol> to save your changes.</cmd>
+            </step>
+        </steps>
+        <result>Snapshots are automatically created according to your specified schedule and saved
+            to the storage location you selected. You can also create an unscheduled snapshot at any
+            time by clicking <uicontrol>Start a snapshot</uicontrol> on the
+                <uicontrol>Dashboard</uicontrol> or on the <wintitle>Snapshots</wintitle> page.
+        </result>
+    </taskbody>
+</task>

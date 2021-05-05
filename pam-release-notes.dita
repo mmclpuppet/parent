@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="pam-release-notes">
+    <title><ph conkeyref="ProductNames/pam_long"/> release notes</title>
+    <shortdesc>These are the new features, enhancements, resolved issues, and deprecations for <ph
+            conkeyref="ProductNames/pam_long"/>. </shortdesc>
+    <prolog>
+        <author type="creator">Mindy Moreland</author>
+        <critdates>
+            <created date="2020/12/04"/>
+        </critdates>
+    </prolog>
+    <conbody>
+        <p>Follow the instructions in <xref keyref="upgrade-pam">Upgrade the platform admin
+                console</xref> to get the current version. </p>
+        <section id="4-May-2021">
+            <title>10 May 2021</title>
+            <p>New in this release: <ul>
+                    <li>Distinct architectures for standalone and high availability deployments of
+                        the <ph conkeyref="ProductNames/pam_long"/> platform. Standalone supports
+                        lower system requirements and resolves inherent flaws in using <ph
+                            conkeyref="ProductNames/ceph"/> on a single node. High availability uses
+                        an updated version of <ph conkeyref="ProductNames/rook"/> for faster, more
+                        reliable distributed storage.</li>
+                    <li>The previous architecture is maintained as the legacy configuration. This
+                        version includes an upgrade of <ph conkeyref="ProductNames/kubernetes"/> to
+                        1.19.10; this upgrade process upgrades through <ph
+                            conkeyref="ProductNames/kubernetes"/> 1.18, and happens on all nodes. It
+                        can take ~1 hour to do for a 3-node cluster, and requires confirmations
+                        during that period. It also includes an upgrade of  <ph
+                            conkeyref="ProductNames/project-contour"/> to version 1.14.1, adds <ph
+                            conkeyref="ProductNames/metrics-server"/> 0.4.1, an upgrade of <ph
+                            conkeyref="ProductNames/ekco"/> to 0.10.1, and an upgrade of <ph
+                            conkeyref="ProductNames/prometheus"/> to 2.26.0</li>
+                </ul></p>
+        </section>
+        <section id="15-april-2021">
+            <title>15 April 2021 (<ph conkeyref="ProductNames/pam_long"/> 1.38.0)</title>
+            <p>New in this release: <ul>
+                    <li><b>Snapshots.</b>
+                        <ph conkeyref="ProductNames/pam_long"/> now supports full (instance-level)
+                        snapshots, which can be used for application rollbacks and disaster
+                        recovery. For more information, go to <xref keyref="pam-snapshots"
+                            >Snapshots</xref>. </li>
+                    <li><b>Component upgrades.</b> This version includes an upgrade of <ph
+                            conkeyref="ProductNames/kots"/> to version 1.38.0. </li>
+                </ul></p>
+        </section>
+        <section id="17-february-2021">
+            <title>17 February 2021 (<ph conkeyref="ProductNames/pam_long"/> 1.29.3)</title>
+            <p>New in this release:<ul>
+                    <li><b>Support for <ph conkeyref="ProductNames/ubuntu"/> 20.04.</b> You can now
+                        run <ph conkeyref="ProductNames/pam_long"/> on <ph
+                            conkeyref="ProductNames/ubuntu"/> 20.04. </li>
+                    <li><b>Component upgrades.</b> This version includes an upgrade of <ph
+                            conkeyref="ProductNames/prometheus"/> to version 2.22.1 and <ph
+                            conkeyref="ProductNames/prometheus"/> Operator to version 0.44.1, an
+                        upgrade of KOTS to version 1.29.3, an upgrade of <ph
+                            conkeyref="ProductNames/project-contour"/> to version 1.12.0, and an
+                        upgrade of <ph conkeyref="ProductNames/ekco"/> to version 0.10.0. </li>
+                </ul></p>
+        </section>
+        <section id="3-february-2021">
+            <title>3 February 2021 (<ph conkeyref="ProductNames/pam_long"/> 1.29.2)</title>
+            <p>New in this release:<ul>
+                    <li><b>Component upgrades.</b> This version includes an upgrade of <ph
+                            conkeyref="ProductNames/kots"/> to version 1.29.2, an upgrade of <ph
+                            conkeyref="ProductNames/project-contour"/> to version 1.11.0, and an
+                        upgrade of <codeph translate="no">containerd</codeph> to version 1.4.3.</li>
+                </ul></p>
+            <p>Resolved in this release:<ul>
+                    <li>During their initial preflight checks, new installations now pull images
+                        successfully and no longer report a <codeph>Failed to pull image</codeph>
+                        error. </li>
+                </ul></p>
+        </section>
+        <section id="7-december-2020">
+            <title>7 December 2020 </title>
+            <p>New in this release:<ul>
+                    <li><b>Support for <ph conkeyref="ProductNames/rhel_plus_init"/> 8 and <ph
+                                conkeyref="ProductNames/centos"/> 8.</b> You can now run <ph
+                            conkeyref="ProductNames/pam_long"/> on <ph conkeyref="ProductNames/rhel"
+                        /> version 8 and <ph conkeyref="ProductNames/centos"/> version 8. To support
+                        this change, <codeph translate="no">containerd</codeph> is now used
+                        independently of <ph conkeyref="ProductNames/docker"/> during the
+                        installation process. </li>
+                    <li><b>Component upgrades.</b> This version includes an upgrade of <ph
+                            conkeyref="ProductNames/kubernetes"/> to version 1.17.13.</li>
+                </ul></p>
+        </section>
+    </conbody>
+</concept>
