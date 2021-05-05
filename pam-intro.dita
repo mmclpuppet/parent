@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="pam-intro">
-    <title>SUBREPO TEST 1</title>
+    <title>SUBREPO TEST 2</title>
     <shortdesc><ph conkeyref="ProductNames/pam_long"/> is an administrative console where you can
         install, access and manage your <ph conkeyref="ProductNames/puppet"/> applications. It is
         also where you can go to access upgrades to new <ph conkeyref="ProductNames/puppet"/>
